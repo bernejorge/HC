@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from '../../../services/spinner.service';
 
 @Component({
   selector: 'app-resumen-clinico',
@@ -10,6 +11,7 @@ export class ResumenClinicoComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-  }
 
+  }
+ 
 }

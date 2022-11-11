@@ -16,6 +16,11 @@ export class PersonasService {
   public $personaSeleccionadaObs = this.personaSeleccionada.asObservable();
   public $relacionesObs = this.relaciones.asObservable();
 
+  private  headers= new HttpHeaders({
+    'Content-Type': 'application/x-www-form-urlencoded',
+    'Accept': 'application/json'
+  });
+
   constructor(private http: HttpClient, private loginService: LoginService) { }
 
   async obtenerRelaciones(): Promise<any> {
@@ -51,20 +56,57 @@ export class PersonasService {
   }
 
   obtenerInformes():Observable<any>{
-    let params = new HttpParams();
-    params = params.append('idPersona',this.pSeleccionada.Id.toString());
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-      }),
-      params: params,
-    };
+    
     
     //http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi/api/Portal/ObtenerInformesPorIdPersona?idPersona=938938
-    let body = `idPersona=${this.pSeleccionada.Id}`;
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerInformesPorIdPersona`,httpOptions)
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerInformesPorIdPersona`,this.getHttpOptionsByIdPersona());
+  }
+
+  obtenerMediacion(){    
+    //http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi/api/Portal/ObtenerPrescripcionesPorPersona?idPersona=938938
+
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerPrescripcionesPorPersona`,this.getHttpOptionsByIdPersona())
     
+  }
+
+  obtenerProfesionalesVisitados() {
+
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerTurnos`,this.getHttpOptionsByPersonaACargo())
+  }
+
+  obtenerAlergias(){
+    ///api/Portal/ObtenerAlergiasPorPersona
+    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
+  }
+
+  obtenerProblemas(){
+
+  }
+
+  obtenerEpisodios(){
+    ///api/Portal/ObtenerEpisodiosPorPersona
+    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerEpisodiosPorPersona`,this.getHttpOptionsByIdPersona())
+
+  }
+
+  private getHttpOptionsByIdPersona(){
+    let params = new HttpParams();
+    params = params.append('idPersona',this.pSeleccionada.Id.toString());
     
+    let httpOptions={
+      headers: this.headers,
+      params: params
+    }
+    return httpOptions;
+  }
+  private getHttpOptionsByPersonaACargo(){
+    let params = new HttpParams();
+    params = params.append('idPersonaACargo',this.pSeleccionada.Id.toString());
+    
+    let httpOptions={
+      headers: this.headers,
+      params: params
+    }
+    return httpOptions;
   }
 }

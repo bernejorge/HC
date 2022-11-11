@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonasService } from '../../../services/personas.service';
 
 @Component({
   selector: 'app-medicamentos',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MedicamentosComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personaSrv: PersonasService) { }
 
   ngOnInit() {
+    this.personaSrv.obtenerMediacion()
+      .subscribe((res)=>{
+          console.log(res);
+      });
   }
 
 }

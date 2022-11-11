@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonasService } from '../../../services/personas.service';
 
 @Component({
   selector: 'app-internaciones',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InternacionesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personaSrv: PersonasService) { 
+
+  }
 
   ngOnInit() {
+    this.personaSrv.obtenerEpisodios()
+      .subscribe((res)=>{
+        console.log(res);
+      });
   }
 
 }

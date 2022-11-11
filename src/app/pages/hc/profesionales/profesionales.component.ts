@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PersonasService } from '../../../services/personas.service';
 
 @Component({
   selector: 'app-profesionales',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfesionalesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private personaSrv: PersonasService ) { }
 
   ngOnInit() {
+    this.personaSrv.obtenerProfesionalesVisitados()
+      .subscribe((res)=>{
+        console.log(res);
+      })
   }
 
 }

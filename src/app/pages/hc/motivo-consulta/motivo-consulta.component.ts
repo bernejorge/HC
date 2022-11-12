@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Problema } from '../../../Models/Problema';
+import { PersonasService } from '../../../services/personas.service';
 
 @Component({
   selector: 'app-motivo-consulta',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MotivoConsultaComponent implements OnInit {
 
-  constructor() { }
+  public problemas?: Problema[];
+  constructor(private personaSrv: PersonasService) { }
 
   ngOnInit() {
+
+    this.getData();
+    this.personaSrv.$personaSeleccionadaObs.subscribe(
+      ()=>this.getData()
+    );
+  }
+
+  getData() { 
+    this.personaSrv.obtenerProblemas()
+      .subscribe(res=>{
+        console.log(res);
+        this.problemas = res.Problemas;
+      });
   }
 
 }

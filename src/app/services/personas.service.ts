@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Persona } from '../Models/Persona';
+import { RespuestaProblemas } from '../Models/RespuestasInterfaces';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -17,7 +18,7 @@ export class PersonasService {
   public $relacionesObs = this.relaciones.asObservable();
 
   private  headers= new HttpHeaders({
-    'Content-Type': 'application/x-www-form-urlencoded',
+    
     'Accept': 'application/json'
   });
 
@@ -48,8 +49,9 @@ export class PersonasService {
 
   cambiarPersona(person: Persona){
     //notificamos a todos los observadores que se selecciono otra persona a cargo
-    this.personaSeleccionada.next(person);
     this.pSeleccionada= person;
+    this.personaSeleccionada.next(person);
+    
   }
   reload(){
     this.relaciones.next(this.personasACargo);
@@ -58,34 +60,36 @@ export class PersonasService {
   obtenerInformes():Observable<any>{
     
     
-    //http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi/api/Portal/ObtenerInformesPorIdPersona?idPersona=938938
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerInformesPorIdPersona`,this.getHttpOptionsByIdPersona());
+    ///api/Portal/ObtenerInformes
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerInformes`,this.getHttpOptionsByIdPersona());
   }
 
   obtenerMediacion(){    
-    //http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi/api/Portal/ObtenerPrescripcionesPorPersona?idPersona=938938
+    ///api/Portal/ObtenerPrescripciones
 
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerPrescripcionesPorPersona`,this.getHttpOptionsByIdPersona())
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerPrescripciones`,this.getHttpOptionsByIdPersona())
     
   }
 
   obtenerProfesionalesVisitados() {
 
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerTurnos`,this.getHttpOptionsByPersonaACargo())
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerTurnos`,this.getHttpOptionsByIdPersona())
   }
 
   obtenerAlergias(){
     ///api/Portal/ObtenerAlergiasPorPersona
-    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
+    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
   }
 
   obtenerProblemas(){
 
+    ///api/Portal/ObtenerProblemas
+    return this.http.get<RespuestaProblemas>(`${environment.API_URL}/api/Portal/ObtenerProblemas`,this.getHttpOptionsByIdPersona())
   }
 
   obtenerEpisodios(){
-    ///api/Portal/ObtenerEpisodiosPorPersona
-    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerEpisodiosPorPersona`,this.getHttpOptionsByIdPersona())
+    ///api/Portal/ObtenerEpisodios
+    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
 
   }
 

@@ -4,7 +4,26 @@
           <h1> Profesionales visitados </h1>
       </div>
   </div>
-  <div class='row'>
+  <div class="row contenidoAlerts" *ngIf="!turnos?.length>0">
+    <div class="col">
+        <div class="alertContainer--primary resultados container-fluid">
+            <div class="row alertRow">
+                <div class="col-auto alert__icon">
+                    <i class="fa fa-fw" aria-hidden="true"></i>
+                </div>
+                <div class="col alert__message">
+                    <p>No se registran <strong>Resultados de estudios</strong> en su Historia clínica.</p>
+                </div>
+                <div class="col-auto alert__close">
+                    <a href="#">
+                        <i class="fa fa-times fa-fw" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <div class='row' *ngIf="turnos?.length>0">
       <div class='col'>
           <div class='card'>
               <div class='card-body'>
@@ -53,67 +72,20 @@
                                           <th class="tableOrderBy">Profesional <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                       </tr>
                                   </thead>
-                                  <tbody>
+                                  <tbody *ngFor="let t of turnos">
                                       <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Guardia externa</td>
-                                          <td>Hospital Privado</td>
-                                          <td>Guardia externa</td>
+                                          <td>{{t.Fecha}}</td>
+                                          <td>{{t.Especialidad}}</td>
+                                          <td>{{t.Lugar}}</td>
+                                          <td>{{t.Medico}}</td>
                                       </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Ortopedia y Traumatología</td>
-                                          <td>Hospital Privado</td>
-                                          <td>HEREDIA, NATALIA</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Cardiología</td>
-                                          <td>Hospital Privado</td>
-                                          <td>AMUCHASTEGUI, LUIS MARIA</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Alergia</td>
-                                          <td>Hospital Privado</td>
-                                          <td>KAHN, ADRIAN MARIO</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Endocrinología</td>
-                                          <td>Hospital Privado</td>
-                                          <td>RAMACCIOTTI, CONSTANZA FERNANDA</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Nefrología</td>
-                                          <td>Hospital Privado</td>
-                                          <td>DE LA FUENTE, JORGE</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Clínica médica</td>
-                                          <td>Hospital Privado</td>
-                                          <td>Ruptura tendón de aquiles</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Valoración preoperatoria</td>
-                                          <td>Hospital Privado</td>
-                                          <td>Valoración preoperatoria</td>
-                                      </tr>
-                                      <tr>
-                                          <td>00-00-0000</td>
-                                          <td>Glomerulonefritis</td>
-                                          <td>Hospital Privado</td>
-                                          <td>Glomerulonefritis</td>
-                                      </tr>
-                                      <tr>
+                                     
+                                      <!-- <tr>
                                           <td>00-00-0000</td>
                                           <td>Gastroenteritis</td>
                                           <td>Hospital Privado</td>
                                           <td>Gastroenteritis</td>
-                                      </tr>
+                                      </tr> -->
                                   </tbody>
                               </table>
                           </div>

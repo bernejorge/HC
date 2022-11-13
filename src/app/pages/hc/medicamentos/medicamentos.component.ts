@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { IPrescripcion, Prescripcion } from '../../../Models/Prescripcion';
+import { RespuestaPrescripcion } from '../../../Models/RespuestasInterfaces';
 import { PersonasService } from '../../../services/personas.service';
 
 @Component({
@@ -6,15 +9,30 @@ import { PersonasService } from '../../../services/personas.service';
   templateUrl: './medicamentos.component.html',
   styleUrls: ['./medicamentos.component.css']
 })
-export class MedicamentosComponent implements OnInit {
+export class MedicamentosComponent implements OnInit, OnDestroy {
 
+  prescripciones?: Prescripcion[];
+  suscripcion: Subscription;
   constructor(private personaSrv: PersonasService) { }
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
+  }
 
   ngOnInit() {
-    this.personaSrv.obtenerMediacion()
-      .subscribe((res)=>{
-          console.log(res);
-      });
+    this.suscripcion = this.personaSrv.$personaSeleccionadaObs
+      .subscribe(()=>this.getData());
+    
+  }
+
+  getData(){
+    this.personaSrv.obtenerMedicacion()
+    .subscribe((res:RespuestaPrescripcion)=>{
+        console.log(res);
+        this.prescripciones = res.Prescripciones.map(x=> Object.assign(new Prescripcion(),x));
+        console.log(this.prescripciones[0].IndicacionMedica + ' ' 
+                  + this.prescripciones[0].EstadoPrescripcion + ' ' 
+                  + this.prescripciones[0].obtenerClass());
+    });
   }
 
 }

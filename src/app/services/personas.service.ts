@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Persona } from '../Models/Persona';
-import { RespuestaProblemas } from '../Models/RespuestasInterfaces';
+import { RespuestaEpisodios, RespuestaInformes, RespuestaPrescripcion, RespuestaProblemas, RespuestaTurnos } from '../Models/RespuestasInterfaces';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -57,28 +57,27 @@ export class PersonasService {
     this.relaciones.next(this.personasACargo);
   }
 
-  obtenerInformes():Observable<any>{
-    
+  obtenerInformes(){   
     
     ///api/Portal/ObtenerInformes
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerInformes`,this.getHttpOptionsByIdPersona());
+    return this.http.get<RespuestaInformes>(`${environment.API_URL}/api/Portal/ObtenerInformes`,this.getHttpOptionsByIdPersona());
   }
 
-  obtenerMediacion(){    
+  obtenerMedicacion(){    
     ///api/Portal/ObtenerPrescripciones
 
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerPrescripciones`,this.getHttpOptionsByIdPersona())
+    return this.http.get<RespuestaPrescripcion>(`${environment.API_URL}/api/Portal/ObtenerPrescripciones`,this.getHttpOptionsByIdPersona())
     
   }
 
   obtenerProfesionalesVisitados() {
 
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerTurnos`,this.getHttpOptionsByIdPersona())
+    return this.http.get<RespuestaTurnos>(`${environment.API_URL}/api/Portal/ObtenerTurnos`,this.getHttpOptionsByIdPersona())
   }
 
   obtenerAlergias(){
     ///api/Portal/ObtenerAlergiasPorPersona
-    return this.http.get(`${environment.API_URL}/api/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
+    return this.http.get<RespuestaProblemas>(`${environment.API_URL}/api/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
   }
 
   obtenerProblemas(){
@@ -89,7 +88,7 @@ export class PersonasService {
 
   obtenerEpisodios(){
     ///api/Portal/ObtenerEpisodios
-    return this.http.get(`${environment.API_URL}/aapi/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
+    return this.http.get<RespuestaEpisodios>(`${environment.API_URL}/aapi/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
 
   }
 

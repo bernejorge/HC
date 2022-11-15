@@ -67,11 +67,7 @@
                           ><i class="fa fa-search" aria-hidden="true"></i
                         ></span>
                       </div>
-                      <input
-                        type="text"
-                        class="form-control"
-                        placeholder="Buscar"
-                      />
+                      <input class="form-control" type="text" name="nombreProblema" [(ngModel)]="nombreProblema" (ngModelChange)="buscar()" placeholder="Buscar">
                     </div>
                   </div>
                 </div>
@@ -112,10 +108,10 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let p of problemas">
+                    <tr *ngFor="let p of problemasFiltrados">
                       <td>{{p.Problema}}</td>
-                      <td>{{p.FechaAltaProblema}}</td>
-                      <td>{{p.FechaUltimaEvolucion}}</td>
+                      <td>{{p.FechaAltaProblema | date:'dd/MM/yyyy'}}</td>
+                      <td>{{validateDate(p.FechaUltimaEvolucion) | date:'dd/MM/yyyy'}}</td>
                     </tr>
                     
                   </tbody>

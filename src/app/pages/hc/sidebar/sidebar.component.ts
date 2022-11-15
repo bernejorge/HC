@@ -9,19 +9,25 @@ import { MenuService } from '../../../services/menu.service';
 export class SidebarComponent implements OnInit {
 
   public isCollapsed = true;
-  constructor(private menuSrv: MenuService) { 
+  constructor(private menuSrv: MenuService) {
     menuSrv.$menuObservable.subscribe(
       {
-        next: (state:boolean) => this.setState(state),
+        next: (state: boolean) => this.setState(state),
       }
     )
   }
-
-  setState(s: boolean) {
-    this.isCollapsed =s;
-  }
-
   ngOnInit() {
   }
+
+  setState(s: boolean) {
+    this.isCollapsed = s;
+  }
+
+  clicked = 0;
+
+  select(i) {
+    this.clicked = i;
+  }
+
 
 }

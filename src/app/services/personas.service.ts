@@ -11,7 +11,7 @@ import { LoginService } from './login.service';
 export class PersonasService {
   
   public personasACargo ?: Persona[];
-  private personaSeleccionada = new Subject<Persona>();
+  private personaSeleccionada = new BehaviorSubject<Persona>(null);
   private relaciones = new Subject<Persona[]>();
   private pSeleccionada : Persona;
   public $personaSeleccionadaObs = this.personaSeleccionada.asObservable();
@@ -38,10 +38,10 @@ export class PersonasService {
         (res:any) =>{          
           r = res.Personas;          
           this.personasACargo = r;
-         
+          this.pSeleccionada= this.personasACargo[0];
           this.personaSeleccionada.next(this.personasACargo[0]);
           this.relaciones.next(this.personasACargo);
-          this.pSeleccionada= this.personasACargo[0];
+          
         });  
 
     return this.personasACargo;
@@ -88,7 +88,7 @@ export class PersonasService {
 
   obtenerEpisodios(){
     ///api/Portal/ObtenerEpisodios
-    return this.http.get<RespuestaEpisodios>(`${environment.API_URL}/aapi/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
+    return this.http.get<RespuestaEpisodios>(`${environment.API_URL}/api/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
 
   }
 

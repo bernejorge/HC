@@ -10,18 +10,22 @@ import { PersonasService } from '../../../services/personas.service';
 export class MainComponent implements OnInit, OnDestroy {
   subscription: Subscription;
 
-  constructor(private personaSrv: PersonasService) { 
-    
+  constructor(private personaSrv: PersonasService) {
+
   }
   ngOnDestroy(): void {
     throw new Error('Method not implemented.');
   }
 
   ngOnInit() {
-    this.subscription = this.personaSrv.$personaSeleccionadaObs
-      .subscribe(person => {
-        console.log("Persona Seleccionada = " + person.NombreCompleto);
+    this.personaSrv.obtenerRelaciones().then(
+      () => {
+        this.subscription = this.personaSrv.$personaSeleccionadaObs
+          .subscribe(person => {
+            console.log("Persona Seleccionada = " + person.NombreCompleto);
+          });
       });
+
   }
 
 }

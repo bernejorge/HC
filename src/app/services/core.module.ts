@@ -4,10 +4,11 @@ import { CommonModule } from '@angular/common';
 import { PersonasService } from './personas.service';
 import { MenuService } from './menu.service';
 import { SpinnerService } from './spinner.service';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
     ],
     exports: [ // components that we want to make available
     ],

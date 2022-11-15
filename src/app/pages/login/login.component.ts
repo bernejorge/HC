@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {FormBuilder, FormsModule} from '@angular/forms';
 import { Router } from '@angular/router';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from '../../services/login.service';
 import { PersonasService } from '../../services/personas.service';
 
@@ -18,10 +19,11 @@ export class LoginComponent implements OnInit {
 		username: [''],
 		password: [''],
 	  });
-	public show = false;
+	public show = true;
 	public mymodalIsOpen:boolean = false;
 
-	constructor(private loginSrv : LoginService, private router:Router,  private fb: FormBuilder, private personaSrv: PersonasService)  {
+	constructor(private loginSrv : LoginService, private router:Router,  private fb: FormBuilder, 
+				private personaSrv: PersonasService, public activeModal: NgbActiveModal)  {
 		
 	}
 
@@ -44,7 +46,7 @@ export class LoginComponent implements OnInit {
 		const LoginObserver={
 			next:(x)=> {
 				console.log(x);
-				this.personaSrv.obtenerRelaciones();
+				this.activeModal.close();
 				this.router.navigate(['/main']);
 			},
 			error:(x)=>{

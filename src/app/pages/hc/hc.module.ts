@@ -12,11 +12,13 @@ import { ResultadosEstudiosComponent } from './resultados-estudios/resultados-es
 import { MedicamentosComponent } from './medicamentos/medicamentos.component';
 import { InternacionesComponent } from './internaciones/internaciones.component';
 import { SpinnerModule } from '../spinner/spinner.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     
     CommonModule, 
+    FormsModule,
     HcRoutingModule,
     SpinnerModule
   ],

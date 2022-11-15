@@ -17,6 +17,8 @@ import { CoreModule } from './services/core.module';
 import { SpinnerComponent } from './pages/spinner/spinner.component';
 import { SpinnerModule } from './pages/spinner/spinner.module';
 import { SpinnerInterceptor } from './iterceptors/spinner-interceptor';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
@@ -28,18 +30,21 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-   
+
   ],
-  imports: [
+  imports: [ 
     RouterModule.forRoot(appRoutes),
     BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     PrincipalModule,
     LoginModule,
     HttpClientModule,
     HcModule,
     CoreModule,
     SpinnerModule,
-    
+    NgbModule.forRoot(),   
+
   ],
   exports: [SpinnerComponent],
   providers: [
@@ -57,7 +62,7 @@ const appRoutes: Routes = [
       useClass: SpinnerInterceptor,
       multi: true
     }
-   
+
   ],
   bootstrap: [AppComponent]
 })

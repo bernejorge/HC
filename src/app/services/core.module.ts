@@ -5,6 +5,7 @@ import { PersonasService } from './personas.service';
 import { MenuService } from './menu.service';
 import { SpinnerService } from './spinner.service';
 import { FormsModule } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
     imports: [
@@ -17,7 +18,9 @@ import { FormsModule } from '@angular/forms';
     providers: [ // singleton services
         PersonasService,
         MenuService,
-        SpinnerService
+        SpinnerService,
+        FormsModule,
+        NgbActiveModal,
     ]
 })
 export class CoreModule { }

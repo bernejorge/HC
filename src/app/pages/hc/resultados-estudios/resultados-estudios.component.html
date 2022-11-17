@@ -103,7 +103,7 @@
                                       <tr>
                                           <td>{{i.FechaRealizacion}}</td>
                                           <td>{{i.Estudio}}</td>
-                                          <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalEstudios"><i class= "{{i.getClass()}} fa-fw" aria-hidden="true"></i></a></td>
+                                          <td style="cursor: pointer;" class="text-center"(click)="openModal(i)" ><i class= "{{i.getClass()}} fa-fw" aria-hidden="true"></i></td>
                                       </tr>
                                     
                                   </tbody>

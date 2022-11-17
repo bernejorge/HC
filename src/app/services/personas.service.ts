@@ -63,6 +63,18 @@ export class PersonasService {
     return this.http.get<RespuestaInformes>(`${environment.API_URL}/api/Portal/ObtenerInformes`,this.getHttpOptionsByIdPersona());
   }
 
+  obtenerInformesPorId(id: number){
+    let params = new HttpParams();
+    params = params.append('idInforme',id.toString());
+    
+    let httpOptions={
+      headers: this.headers,
+      params: params
+    }
+    //api/Portal/ObtenerInformesPorId
+    return this.http.get<RespuestaInformes>(`${environment.API_URL}/api/Portal/ObtenerInformesPorId`,httpOptions);
+  }
+
   obtenerMedicacion(){    
     ///api/Portal/ObtenerPrescripciones
 

@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Base } from '../../../Models/BaseModel';
 import { Informe } from '../../../Models/Informe';
 import { PersonasService } from '../../../services/personas.service';
 
@@ -11,8 +12,9 @@ import { PersonasService } from '../../../services/personas.service';
 export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
 
   informes?: Informe[];
+  informesFiltrados?: Informe[];
   suscripcion : Subscription;
-
+  strBuscar: string;
   constructor(private PersonaSrv: PersonasService) { }
   ngOnDestroy(): void {
     this.suscripcion.unsubscribe();
@@ -27,8 +29,14 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
     this.PersonaSrv.obtenerInformes()
       .subscribe((res) => {
         console.log(res);
-        this.informes = res.Informes;
+        this.informes = res.Informes.map(x=> Object.assign(new Informe(), x));
+        this.informesFiltrados =  this.informes;
     })
   }
+
+  buscar() {    
+    this.informesFiltrados = Base.Filtrar(this.informes, this.strBuscar);
+  }
+  
 
 }

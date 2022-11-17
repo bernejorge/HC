@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Base } from '../../../Models/BaseModel';
 import { Problema, ProblemaInterface } from '../../../Models/Problema';
 import { PersonasService } from '../../../services/personas.service';
 
@@ -10,8 +11,8 @@ import { PersonasService } from '../../../services/personas.service';
 })
 export class MotivoConsultaComponent implements OnInit, OnDestroy {
 
-  public problemas?: ProblemaInterface[];
-  public problemasFiltrados?: ProblemaInterface[];
+  public problemas?: Problema[];
+  public problemasFiltrados?: Problema[];
   public nombreProblema :any;
   private suscripcion: Subscription;
   constructor(private personaSrv: PersonasService) { }
@@ -29,8 +30,8 @@ export class MotivoConsultaComponent implements OnInit, OnDestroy {
     this.personaSrv.obtenerProblemas()
       .subscribe(res=>{
         console.log(res);
-        this.problemas = res.Problemas;
-        this.problemasFiltrados = res.Problemas;
+        this.problemas = res.Problemas.map(x=> Object.assign(new Problema(),x));
+        this.problemasFiltrados = this.problemas;
       });
   }
   validateDate(d:string) {
@@ -40,30 +41,16 @@ export class MotivoConsultaComponent implements OnInit, OnDestroy {
       return d;
     }
   }
-//    Filtrar<Type extends Problema>(arg: Type[], filtro: string): Type[] {
-//     if (filtro == "") {
-//         return arg;
-//     } else {
-//         let result = arg.filter(
-//             (x:Type) => {
-//                 return x.getDataToFilter().toLowerCase().match(filtro.toLowerCase())
-//             }            
-//         );
-//         return result;
-//     }
-// }
-  buscar(){
- 
-    if(this.nombreProblema ==""){
-      return this.problemasFiltrados = this.problemas;
-    }
-    else{
-      this.problemasFiltrados = this.problemas.filter(
-        (p)=> {
-          return p.Problema.toLowerCase().match(this.nombreProblema.toLowerCase())
-        }
-      );
-    }
+
+  buscar(){     
+   
+      this.problemasFiltrados = Base.Filtrar(this.problemas,this.nombreProblema);
+      // this.problemasFiltrados = this.problemas.filter(
+      //   (p)=> {
+      //     return p.Problema.toLowerCase().match(this.nombreProblema.toLowerCase())
+      //   }
+      // );
+    
    }
  
 }

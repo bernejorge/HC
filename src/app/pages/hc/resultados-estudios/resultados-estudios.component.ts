@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Base } from '../../../Models/BaseModel';
 import { Informe } from '../../../Models/Informe';
@@ -15,7 +16,10 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
   informesFiltrados?: Informe[];
   suscripcion : Subscription;
   strBuscar: string;
-  constructor(private PersonaSrv: PersonasService) { }
+  constructor(private PersonaSrv: PersonasService, public activeModal: NgbActiveModal) { 
+
+  }
+
   ngOnDestroy(): void {
     this.suscripcion.unsubscribe();
   }
@@ -38,5 +42,17 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
     this.informesFiltrados = Base.Filtrar(this.informes, this.strBuscar);
   }
   
+  openModal(inf: Informe){
+    let informeCompleto: Informe;
+    this.PersonaSrv.obtenerInformesPorId(inf.Id)
+      .subscribe((res)=>{
+        if(res.Informes){
+          informeCompleto = res.Informes.map(x=> Object.assign(new Informe(), x))[0];
+        }
+      }
+      )
+    console.log(inf.Id, + "  " + inf.Estudio);
+
+  }
 
 }

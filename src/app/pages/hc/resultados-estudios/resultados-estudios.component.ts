@@ -1,9 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Base } from '../../../Models/BaseModel';
 import { Informe } from '../../../Models/Informe';
 import { PersonasService } from '../../../services/personas.service';
+import { LoginComponent } from '../../login/login.component';
+import { ResultadosEstudiosModalComponent } from '../resultados-estudios-modal/resultados-estudios-modal.component';
 
 @Component({
   selector: 'app-resultados-estudios',
@@ -16,7 +18,7 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
   informesFiltrados?: Informe[];
   suscripcion : Subscription;
   strBuscar: string;
-  constructor(private PersonaSrv: PersonasService, public activeModal: NgbActiveModal) { 
+  constructor(private PersonaSrv: PersonasService,private modalService: NgbModal) { 
 
   }
 
@@ -48,6 +50,8 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
       .subscribe((res)=>{
         if(res.Informes){
           informeCompleto = res.Informes.map(x=> Object.assign(new Informe(), x))[0];
+          const modalRef = this.modalService.open(ResultadosEstudiosModalComponent, { size: 'lg' });
+          modalRef.componentInstance.estudio = informeCompleto;
         }
       }
       )

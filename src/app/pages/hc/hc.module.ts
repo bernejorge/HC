@@ -31,10 +31,13 @@ import { ResultadosEstudiosModalComponent } from "./resultados-estudios-modal/re
     SidebarComponent,
     MotivoConsultaComponent,
     ProfesionalesComponent,
+    ResultadosEstudiosModalComponent,
     ResultadosEstudiosComponent,
     MedicamentosComponent,
     InternacionesComponent,
-    ResultadosEstudiosModalComponent,
+    
   ],
+  entryComponents:[ResultadosEstudiosModalComponent],
+  exports:[ResultadosEstudiosModalComponent]
 })
 export class HcModule {}

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { Informe } from '../../../Models/Informe';
 
 @Component({
   selector: 'app-resultados-estudios-modal',
@@ -6,8 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./resultados-estudios-modal.component.css']
 })
 export class ResultadosEstudiosModalComponent implements OnInit {
-  //@Input() estudio;
-  constructor() { }
+  @Input() estudio : Informe;
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit() {
   }

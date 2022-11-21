@@ -21,9 +21,10 @@ export class MotivoConsultaComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.suscripcion = this.personaSrv.$personaSeleccionadaObs.subscribe(
-      ()=>this.getData()
-    );
+    this.suscripcion = this.personaSrv.$personaSeleccionadaObs
+      .subscribe((res)=>{
+        if (res)
+        this.getData()});
   }
 
   getData() { 

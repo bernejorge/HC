@@ -29,5 +29,8 @@ export class SidebarComponent implements OnInit {
     this.clicked = i;
   }
 
-
+  onMenuClick(){
+    console.log("Click en el menu toggle!");
+    this.menuSrv.menuToggle();
+  }
 }

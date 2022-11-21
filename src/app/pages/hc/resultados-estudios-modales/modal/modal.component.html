@@ -1,3 +1,4 @@
+
 <div class="modal-header">
   <h4 class="modal-title" id="modalEstudiosHP">
     LAB - QUIMICA CLINICA (sangre)
@@ -13,6 +14,9 @@
     <div class="col-md-6 col-xs-12"><b>Informe:</b> {{estudio.Estudio}}</div>
     <div class="col-md-6 col-xs-12"><b>Fecha:</b> {{estudio.FechaRealizacion | date: 'dd/MM/yyyy'}}</div>
   </div>
+
+  <app-estudios-lab [estudio]="estudio"></app-estudios-lab>
+  
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">

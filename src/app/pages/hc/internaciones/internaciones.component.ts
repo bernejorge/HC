@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Base } from '../../../Models/BaseModel';
 import { Episodio } from '../../../Models/Episodio';
 import { PersonasService } from '../../../services/personas.service';
 
@@ -11,7 +12,7 @@ import { PersonasService } from '../../../services/personas.service';
 export class InternacionesComponent implements OnInit, OnDestroy{
 
   suscripcion: Subscription;
-  episodios?: Episodio[];
+  episodiosFiltrados?: Episodio[];
   constructor(private personaSrv: PersonasService) { 
 
   }
@@ -20,15 +21,22 @@ export class InternacionesComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit() {
-    this.suscripcion= this.personaSrv.$personaSeleccionadaObs
-      .subscribe(()=>this.getData());
+    this.suscripcion = this.personaSrv.$personaSeleccionadaObs
+      .subscribe((res)=>{
+        if (res)
+        this.getData()});
   }
 
   getData(){
     this.personaSrv.obtenerEpisodios()
       .subscribe((res)=>{
         console.log(res);
+        this.episodiosFiltrados = res.Episodios.map(x=> Object.assign(new Episodio(), x));
       });
   }
 
-}
+  validateDate(date:string):string {
+    return Base.validateDate(date);
+  }
+
+} 

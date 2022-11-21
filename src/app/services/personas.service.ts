@@ -22,7 +22,9 @@ export class PersonasService {
     'Accept': 'application/json'
   });
 
-  constructor(private http: HttpClient, private loginService: LoginService) { }
+  constructor(private http: HttpClient, private loginService: LoginService) { 
+    this.obtenerRelaciones();
+  }
 
   async obtenerRelaciones(): Promise<any> {
     let httpOptions = {

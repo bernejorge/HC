@@ -18,13 +18,12 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.personaSrv.obtenerRelaciones().then(
-      () => {
-        this.subscription = this.personaSrv.$personaSeleccionadaObs
-          .subscribe(person => {
-            console.log("Persona Seleccionada = " + person.NombreCompleto);
-          });
+
+    this.subscription = this.personaSrv.$personaSeleccionadaObs
+      .subscribe(person => {
+        if (person) { console.log("Persona Seleccionada = " + person.NombreCompleto);}
       });
+
 
   }
 

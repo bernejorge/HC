@@ -19,7 +19,9 @@ export class ProfesionalesComponent implements OnInit, OnDestroy {
   ngOnInit() {
 
     this.suscripcion = this.personaSrv.$personaSeleccionadaObs
-        .subscribe(()=>this.getData());    
+      .subscribe((res)=>{
+        if (res)
+        this.getData()});
   }
 
   getData(){

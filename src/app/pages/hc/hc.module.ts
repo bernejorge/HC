@@ -13,7 +13,10 @@ import { MedicamentosComponent } from "./medicamentos/medicamentos.component";
 import { InternacionesComponent } from "./internaciones/internaciones.component";
 import { SpinnerModule } from "../spinner/spinner.module";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { ResultadosEstudiosModalComponent } from "./resultados-estudios-modal/resultados-estudios-modal.component";
+
+import { ModalComponent } from './resultados-estudios-modales/modal/modal.component';
+import { EstudiosLabComponent } from './resultados-estudios-modales/estudios-lab/estudios-lab.component';
+import { InternacionModalComponent } from './internaciones/internacion-modal/internacion-modal.component';
 
 @NgModule({
   imports: [
@@ -22,6 +25,7 @@ import { ResultadosEstudiosModalComponent } from "./resultados-estudios-modal/re
     FormsModule,
     HcRoutingModule,
     SpinnerModule,
+    
   ],
   declarations: [
     MainComponent,
@@ -31,13 +35,16 @@ import { ResultadosEstudiosModalComponent } from "./resultados-estudios-modal/re
     SidebarComponent,
     MotivoConsultaComponent,
     ProfesionalesComponent,
-    ResultadosEstudiosModalComponent,
+
     ResultadosEstudiosComponent,
     MedicamentosComponent,
     InternacionesComponent,
+    ModalComponent,
+    EstudiosLabComponent,
+    InternacionModalComponent,
     
   ],
-  entryComponents:[ResultadosEstudiosModalComponent],
-  exports:[ResultadosEstudiosModalComponent]
+  entryComponents:[ ModalComponent],
+  exports:[]
 })
 export class HcModule {}

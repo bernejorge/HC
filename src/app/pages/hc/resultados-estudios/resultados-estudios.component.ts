@@ -4,8 +4,7 @@ import { Subscription } from 'rxjs';
 import { Base } from '../../../Models/BaseModel';
 import { Informe } from '../../../Models/Informe';
 import { PersonasService } from '../../../services/personas.service';
-import { LoginComponent } from '../../login/login.component';
-import { ResultadosEstudiosModalComponent } from '../resultados-estudios-modal/resultados-estudios-modal.component';
+import { ModalComponent } from '../resultados-estudios-modales/modal/modal.component';
 
 @Component({
   selector: 'app-resultados-estudios',
@@ -18,7 +17,7 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
   informesFiltrados?: Informe[];
   suscripcion : Subscription;
   strBuscar: string;
-  constructor(private PersonaSrv: PersonasService,private modalService: NgbModal) { 
+  constructor(private personaSrv: PersonasService,private modalService: NgbModal) { 
 
   }
 
@@ -27,12 +26,14 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.suscripcion = this.PersonaSrv.$personaSeleccionadaObs
-      .subscribe(()=>this.getData());
+    this.suscripcion = this.personaSrv.$personaSeleccionadaObs
+      .subscribe((res)=>{
+        if (res)
+        this.getData()});
   }
 
   getData(){
-    this.PersonaSrv.obtenerInformes()
+    this.personaSrv.obtenerInformes()
       .subscribe((res) => {
         console.log(res);
         this.informes = res.Informes.map(x=> Object.assign(new Informe(), x));
@@ -46,11 +47,11 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
   
   openModal(inf: Informe){
     let informeCompleto: Informe;
-    this.PersonaSrv.obtenerInformesPorId(inf.Id)
+    this.personaSrv.obtenerInformesPorId(inf.Id)
       .subscribe((res)=>{
         if(res.Informes){
           informeCompleto = res.Informes.map(x=> Object.assign(new Informe(), x))[0];
-          const modalRef = this.modalService.open(ResultadosEstudiosModalComponent, { size: 'lg' });
+          const modalRef = this.modalService.open(ModalComponent, { size: 'lg' });
           modalRef.componentInstance.estudio = informeCompleto;
         }
       }

@@ -1,8 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Subscription } from 'rxjs';
 import { Base } from '../../../Models/BaseModel';
-import { Episodio } from '../../../Models/Episodio';
+import { Episodio, EpisodioInterface } from '../../../Models/Episodio';
 import { PersonasService } from '../../../services/personas.service';
+import { InternacionModalComponent } from './internacion-modal/internacion-modal.component';
 
 @Component({
   selector: 'app-internaciones',
@@ -13,7 +15,7 @@ export class InternacionesComponent implements OnInit, OnDestroy{
 
   suscripcion: Subscription;
   episodiosFiltrados?: Episodio[];
-  constructor(private personaSrv: PersonasService) { 
+  constructor(private personaSrv: PersonasService, private modalService: NgbModal ) { 
 
   }
   ngOnDestroy(): void {
@@ -37,6 +39,19 @@ export class InternacionesComponent implements OnInit, OnDestroy{
 
   validateDate(date:string):string {
     return Base.validateDate(date);
+  }
+
+  openModal(episodio: EpisodioInterface){
+    this.personaSrv.obtenerEpicrisisPorIdEpisodio(episodio.Id)
+      .subscribe((res)=>{
+        if(res.Epicrisis){
+          const modalRef = this.modalService.open(InternacionModalComponent, {size: 'lg'});
+          modalRef.componentInstance.modal.Epicrisises = res.Epicrisis;
+        }
+      }
+      );
+    
+
   }
 
 } 

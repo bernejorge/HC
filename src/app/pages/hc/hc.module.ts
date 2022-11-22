@@ -44,7 +44,7 @@ import { InternacionModalComponent } from './internaciones/internacion-modal/int
     InternacionModalComponent,
     
   ],
-  entryComponents:[ ModalComponent],
+  entryComponents:[ ModalComponent, InternacionModalComponent],
   exports:[]
 })
 export class HcModule {}

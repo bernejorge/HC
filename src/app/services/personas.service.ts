@@ -3,8 +3,9 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
+import { Episodio } from '../Models/Episodio';
 import { Persona } from '../Models/Persona';
-import { RespuestaEpisodios, RespuestaInformes, RespuestaPrescripcion, RespuestaProblemas, RespuestaTurnos } from '../Models/RespuestasInterfaces';
+import { RespuestaEpicrisis, RespuestaEpisodios, RespuestaInformes, RespuestaPrescripcion, RespuestaProblemas, RespuestaTurnos } from '../Models/RespuestasInterfaces';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -103,6 +104,20 @@ export class PersonasService {
   obtenerEpisodios(){
     ///api/Portal/ObtenerEpisodios
     return this.http.get<RespuestaEpisodios>(`${environment.API_URL}/api/Portal/ObtenerEpisodios`,this.getHttpOptionsByIdPersona())
+
+  }
+
+  obtenerEpicrisisPorIdEpisodio(id: number) {
+    let params = new HttpParams();
+    params = params.append('idEpisodio',id.toString());
+    
+    let httpOptions={
+      headers: this.headers,
+      params: params
+    }
+
+    //api/Portal/ObtenerEpicrisis
+    return this.http.get<RespuestaEpicrisis>(`${environment.API_URL}/api/Portal/ObtenerEpicrisis`,httpOptions);
 
   }
 

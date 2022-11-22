@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PersonasService } from './services/personas.service';
 
 @Component({
@@ -9,4 +11,18 @@ import { PersonasService } from './services/personas.service';
 })
 export class AppComponent {
   title = 'app';
+  subscription: Subscription;
+  browserRefresh: boolean;
+
+  constructor(private router: Router) {
+    this.subscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.browserRefresh = !this.router.navigated;
+        if(this.browserRefresh)
+        {
+          console.log(this.browserRefresh);
+        }
+      }
+  });
+  }
 }

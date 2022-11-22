@@ -91,7 +91,7 @@
                                               <td>{{e.FechaIngreso | date:'dd/MM/yyyy'}}</td>
                                               <td>{{validateDate(e.FechaDeAltaAdm) | date:'dd/MM/yyyy'}}</td>
                                               <td>{{e.NombreServicio}}</td>
-                                              <td class="text-center"><i *ngIf="e.TieneEpicrisis" class="fa fa-file-text-o fa-fw" aria-hidden="true"></i></td>
+                                              <td class="text-center"><i *ngIf="e.TieneEpicrisis" (click)="openModal(e)" class="fa fa-file-text-o fa-fw" aria-hidden="true"></i></td>
                                           </tr>
                                           
                                       </tbody>

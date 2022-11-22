@@ -1,4 +1,6 @@
-export interface IPrescripcion {
+import { Base } from "./BaseModel";
+
+export interface IPrescripcion extends Base {
     Id:                    number;
     Fecha:                 Date;
     TratamientoProlongado: boolean;
@@ -10,9 +12,14 @@ export interface IPrescripcion {
     FechaMostrar:          Date;
     Problema:              string;
     obtenerClass(): string;
+   
 }
 
 export class Prescripcion implements IPrescripcion {
+    public getDataToFilter(): string {
+       return this.Nombre;
+    }
+   
    
     Id: number;
     Fecha: Date;
@@ -26,22 +33,35 @@ export class Prescripcion implements IPrescripcion {
     Problema: string;
     
     public obtenerClass(): string {
-        if(this.IndicacionMedica == 'ACTIVA')
-        {
-            if(this.EstadoPrescripcion == 'VENCIDO'){
-                //activo y vencido
+
+        switch (this.EstadoPrescripcion) {
+            case "Activo":
+                return 'estadoPrescripcion--activo';
+               
+            case "Vencido":
                 return 'estadoPrescripcion--vencido';
-            }else return 'estadoPrescripcion--activo';
-        }
-        else {
-            if (this.IndicacionMedica == 'FINALIZADA'){
-                return 'estadoPrescripcion--finalizado';
-            } else if(this.IndicacionMedica == 'SUSPENDIDO'){
+
+            case "Suspendido":
                 return 'estadoPrescripcion--inactivo';
-            }else{
-                return 'estadoPrescripcion--indefinido';;
-            }
+
+            case "Finalizado":
+                return 'estadoPrescripcion--finalizado';
+
+            default:
+                return 'estadoPrescripcion--indefinido';
         }
+
+     
+        
+       
+            // if (this.IndicacionMedica == 'FINALIZADA'){
+            //     return 'estadoPrescripcion--finalizado';
+            // } else if(this.IndicacionMedica == 'SUSPENDIDO'){
+            //     return 'estadoPrescripcion--inactivo';
+            // }else{
+            //     return 'estadoPrescripcion--indefinido';;
+            // }
+        
     
         // if($indicacionMedica == 'ACTIVA'){
         //     if($estadoPrescripcion == 'VENCIDO'){
@@ -77,5 +97,6 @@ export class Prescripcion implements IPrescripcion {
         // }
     }
 
+    
 }
 

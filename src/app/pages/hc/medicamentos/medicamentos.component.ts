@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Base } from '../../../Models/BaseModel';
 import { IPrescripcion, Prescripcion } from '../../../Models/Prescripcion';
 import { RespuestaPrescripcion } from '../../../Models/RespuestasInterfaces';
 import { PersonasService } from '../../../services/personas.service';
@@ -13,6 +14,7 @@ export class MedicamentosComponent implements OnInit, OnDestroy {
 
   prescripciones?: Prescripcion[];
   prescripcionesFiltradas?: Prescripcion[];
+  strBuscar :any;
   
   suscripcion: Subscription;
 
@@ -35,14 +37,12 @@ export class MedicamentosComponent implements OnInit, OnDestroy {
         console.log(res);
         this.prescripciones = res.Prescripciones.map(x=> Object.assign(new Prescripcion(),x));
         this.prescripcionesFiltradas = this.prescripciones;
-        console.log(this.prescripciones[0].IndicacionMedica + ' ' 
-                  + this.prescripciones[0].EstadoPrescripcion + ' ' 
-                  + this.prescripciones[0].obtenerClass());
+        
     });
   }
 
-  busqueda(){
-
+  buscar(){
+    if(this.prescripciones) this.prescripcionesFiltradas = Base.Filtrar(this.prescripciones, this.strBuscar);
   }
 
 }

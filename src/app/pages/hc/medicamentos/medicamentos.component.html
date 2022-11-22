@@ -69,7 +69,7 @@
                                           <div class='input-group-prepend'>
                                               <span class='input-group-text'><i class='fa fa-search' aria-hidden='true'></i></span>
                                           </div>
-                                          <input type='text' class='form-control' placeholder="Buscar">
+                                          <input type='text' class='form-control' placeholder="Buscar" [(ngModel)]="strBuscar" (ngModelChange)="buscar()">
                                       </div>
                                   </div>
                               </div>
@@ -87,15 +87,15 @@
                                           <th class="tableOrderBy text-center" width="125">Estado <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                       </tr>
                                   </thead>
-                                  <tbody>
-                                      <tr class="estadoPrescripcion--activo">
-                                          <td>00-00-0000</td>
-                                          <td>00-00-0000</td>
-                                          <td>Losartán 50 mg</td>
-                                          <td>Si</td>
-                                          <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Activo" class="fa fa-svg fa-pildora fa-fw"></i></td>
+                                  <tbody *ngFor="let p of prescripcionesFiltradas">
+                                      <tr class="{{p.obtenerClass()}}">
+                                          <td>{{p.FechaMostrar | date}}</td>
+                                          <td>{{p.Fecha | date}}</td>
+                                          <td>{{p.Nombre}}</td>
+                                          <td>{{p.TratamientoProlongado ? 'Si' : 'No'}}</td>
+                                          <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{p.EstadoPrescripcion}}" class="fa fa-svg fa-pildora fa-fw"></i></td>
                                       </tr>
-                                      <tr class="estadoPrescripcion--indefinido">
+                                      <!-- <tr class="estadoPrescripcion--indefinido">
                                           <td>00-00-0000</td>
                                           <td>-</td>
                                           <td>Allupurinol 100 mg</td>
@@ -122,7 +122,7 @@
                                           <td>Espironolactona</td>
                                           <td>No</td>
                                           <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Activo" class="fa fa-svg fa-pildora fa-fw"></i></td>
-                                      </tr>
+                                      </tr> -->
                                   </tbody>
                               </table>
                           </div>

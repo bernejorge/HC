@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NavigationStart, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PersonasService } from '../../../services/personas.service';
 
@@ -9,6 +10,7 @@ import { PersonasService } from '../../../services/personas.service';
 })
 export class MainComponent implements OnInit, OnDestroy {
   subscription: Subscription;
+  browserRefresh: boolean;
 
   constructor(private personaSrv: PersonasService) {
 
@@ -24,6 +26,8 @@ export class MainComponent implements OnInit, OnDestroy {
         if (person) { console.log("Persona Seleccionada = " + person.NombreCompleto);}
       });
 
+
+      
 
   }
 

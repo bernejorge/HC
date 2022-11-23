@@ -17,6 +17,9 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { ModalComponent } from './resultados-estudios-modales/modal/modal.component';
 import { EstudiosLabComponent } from './resultados-estudios-modales/estudios-lab/estudios-lab.component';
 import { InternacionModalComponent } from './internaciones/internacion-modal/internacion-modal.component';
+import { CardMedicamentosComponent } from './footer/card-medicamentos/card-medicamentos.component';
+import { CardProfesionalesComponent } from './footer/card-profesionales/card-profesionales.component';
+import { CardEstudiosComponent } from './footer/card-estudios/card-estudios.component';
 
 @NgModule({
   imports: [
@@ -42,6 +45,9 @@ import { InternacionModalComponent } from './internaciones/internacion-modal/int
     ModalComponent,
     EstudiosLabComponent,
     InternacionModalComponent,
+    CardMedicamentosComponent,
+    CardProfesionalesComponent,
+    CardEstudiosComponent,
     
   ],
   entryComponents:[ ModalComponent, InternacionModalComponent],

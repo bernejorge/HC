@@ -13,7 +13,7 @@ export class SidebarComponent implements OnInit {
   public isCollapsed = true;
   href: string;
   subscription: Subscription;
-  browserRefresh =false;
+  browserRefresh = false;
   constructor(private menuSrv: MenuService, private router: Router) {
     menuSrv.$menuObservable.subscribe(
       {
@@ -21,35 +21,43 @@ export class SidebarComponent implements OnInit {
       }
     )
 
-   
+    this.subscription = this.router.events.subscribe((event) => {
+      if (event instanceof NavigationStart) {
+        this.browserRefresh = !this.router.navigated;
+        if (this.browserRefresh) {
+          console.log(this.browserRefresh);
+        }
+        switch (event.url) {
+          case "/main/motivo-consulta":
+            this.select(1);
+            break;
+
+          case "/main/profesionales":
+            this.select(2);
+            break;
+
+          case "/main/resultados":
+            this.select(3);
+            break;
+
+          case "/main/medicamentos":
+            this.select(4);
+            break;
+
+          case "/main/internaciones":
+            this.select(5);
+            break;
+
+            default:
+              this.select(0);
+              break;
+        }
+      }
+    });
+
   }
   ngOnInit() {
     this.href = this.router.url;
-    switch (this.href) {
-      case "motivo-consulta":
-        this.select(1);
-        break;
-    
-      case "profesionales":
-        this.select(2);
-        break;
-      
-      case "resultados":
-        this.select(3);
-        break;
-      
-      case "medicamentos":
-        this.select(4);
-        break;
-      
-      case "internaciones":
-        this.select(5);
-        break;
-
-      default:
-        this.select(0);
-        break;
-    }
   }
 
   setState(s: boolean) {
@@ -62,7 +70,7 @@ export class SidebarComponent implements OnInit {
     this.clicked = i;
   }
 
-  onMenuClick(){
+  onMenuClick() {
     console.log("Click en el menu toggle!");
     this.menuSrv.menuToggle();
   }

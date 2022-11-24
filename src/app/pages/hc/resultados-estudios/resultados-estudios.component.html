@@ -16,35 +16,35 @@
                               </div>
                               <div class="col filtroResultados__switch">
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-vaso fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Laboratorio químico</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-probeta fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Hematología y Oncología</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-chupete fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Imagenes y digitalizaciones</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-chupete fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Anatomía patológica</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-chupete fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Histocompatibilidad y Biología Molecular</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
@@ -64,12 +64,13 @@
                                           <p>Mostrar</p>
                                       </div>
                                       <div class='col'>
-                                          <div class='form-group'>
-                                              <select class='form-control'>
-                                                  <option value='' selected=''>10</option>
-                                                  <option value=''>25</option>
-                                                  <option value=''>50</option>
-                                              </select>
+                                        <div class="form-group">
+                                            <select class="form-control" type="number" [(ngModel)]="cantidad">
+                                              <option [value]="10" selected="">10</option>
+                                              <option [value]="25">25</option>
+                                              <option [value]="50">50</option>
+                                            </select>
+                                            
                                           </div>
                                       </div>
                                       <div class='col-auto control-label-between'>
@@ -94,12 +95,12 @@
                               <table class='table'>
                                   <thead>
                                       <tr>
-                                          <th class="tableOrderBy--active">Fecha <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy">Estudio realizado <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy text-center" width="125">Informe <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th (click)="sort('FechaRealizacion')" class="tableOrderBy--active">Fecha <a><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy">Estudio realizado <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy text-center" width="125">Informe <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                       </tr>
                                   </thead>
-                                  <tbody *ngFor="let i of informesFiltrados">
+                                  <tbody *ngFor="let i of informesFiltrados | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
                                       <tr>
                                           <td>{{i.FechaRealizacion | date:'dd/MM/yyyy' }}</td>
                                           <td>{{i.Estudio}}</td>
@@ -107,38 +108,39 @@
                                       </tr>
                                     
                                   </tbody>
+                                  <pagination-controls class="my-pagination" previousLabel="Anterior" nextLabel="Proximo" (pageChange)="p = $event" ></pagination-controls>
                               </table>
                           </div>
                       </div>
-                      <div class="col">
+                      <!-- <div class="col">
                           <nav class="componentePaginador">
                               <ul class="pagination">
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Previous">
+                                      <a class="page-link"  aria-label="Previous">
                                           <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                                       </a>
                                   </li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Previous">
+                                      <a class="page-link"  aria-label="Previous">
                                           <i class="fa fa-angle-left" aria-hidden="true"></i>
                                       </a>
                                   </li>
-                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item active"><a class="page-link" >1</a></li>
+                                  <li class="page-item"><a class="page-link" >2</a></li>
+                                  <li class="page-item"><a class="page-link" >3</a></li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Next">
+                                      <a class="page-link"  aria-label="Next">
                                           <i class="fa fa-angle-right" aria-hidden="true"></i>
                                       </a>
                                   </li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Next">
+                                      <a class="page-link"  aria-label="Next">
                                           <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                       </a>
                                   </li>
                               </ul>
                           </nav>
-                      </div>
+                      </div> -->
                   </div>
               </div>
           </div>

@@ -4,6 +4,7 @@ import { Informe } from "./Informe";
 import { Mensaje } from "./Mensaje";
 import { IPrescripcion, Prescripcion } from "./Prescripcion";
 import { Problema } from "./Problema";
+import { SignosVitales } from "./SignosVitales";
 import { ITurno } from "./Turnos";
 
 export interface RespuestaProblemas {
@@ -69,4 +70,14 @@ export interface RespuestaEpicrisis {
     Exito: boolean;
     Mensajes: Mensaje[];
     HasException: boolean;
+}
+
+export interface RespuestaSignosVitales {
+    SignosVitales: SignosVitales[];
+    Codigo:        number;
+    Mensaje:       string;
+    IdRequest:     string;
+    Exito:         boolean;
+    Mensajes:      Mensaje[];
+    HasException:  boolean;
 }

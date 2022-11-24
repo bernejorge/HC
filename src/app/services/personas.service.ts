@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 import { environment } from '../../environments/environment';
 import { Episodio } from '../Models/Episodio';
 import { Persona } from '../Models/Persona';
-import { RespuestaEpicrisis, RespuestaEpisodios, RespuestaInformes, RespuestaPrescripcion, RespuestaProblemas, RespuestaTurnos } from '../Models/RespuestasInterfaces';
+import { RespuestaEpicrisis, RespuestaEpisodios, RespuestaInformes, RespuestaPrescripcion, RespuestaProblemas, RespuestaSignosVitales, RespuestaTurnos } from '../Models/RespuestasInterfaces';
 import { LoginService } from './login.service';
 
 @Injectable()
@@ -93,6 +93,11 @@ export class PersonasService {
   obtenerAlergias(){
     ///api/Portal/ObtenerAlergiasPorPersona
     return this.http.get<RespuestaProblemas>(`${environment.API_URL}/api/Portal/ObtenerAlergiasPorPerson`,this.getHttpOptionsByIdPersona())
+  }
+
+  obtenerSignosVitales(){
+    //api/Portal/ObtenerSignosVitales
+    return this.http.get<RespuestaSignosVitales>(`${environment.API_URL}/api/Portal/ObtenerSignosVitales`,this.getHttpOptionsByIdPersona());
   }
 
   obtenerProblemas(){

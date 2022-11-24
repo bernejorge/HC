@@ -13,6 +13,8 @@ import { InternacionModalComponent } from './internacion-modal/internacion-modal
 })
 export class InternacionesComponent implements OnInit, OnDestroy{
 
+  p: number = 1;
+  cantidad: number = 10;
   suscripcion: Subscription;
   episodiosFiltrados?: Episodio[];
   constructor(private personaSrv: PersonasService, private modalService: NgbModal ) { 
@@ -54,4 +56,10 @@ export class InternacionesComponent implements OnInit, OnDestroy{
 
   }
 
+  key: string= 'FechaAltaProblema';
+  reverse:boolean = false;
+  sort(key){
+   this.key =key;
+   this.reverse = !this.reverse;
+  }
 } 

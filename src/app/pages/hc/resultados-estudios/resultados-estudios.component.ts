@@ -15,9 +15,11 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
 
   informes?: Informe[];
   informesFiltrados?: Informe[];
-  suscripcion : Subscription;
+  suscripcion: Subscription;
   strBuscar: string;
-  constructor(private personaSrv: PersonasService,private modalService: NgbModal) { 
+  p: number = 1;
+  cantidad: number = 10;
+  constructor(private personaSrv: PersonasService, private modalService: NgbModal) {
 
   }
 
@@ -27,37 +29,44 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.suscripcion = this.personaSrv.$personaSeleccionadaObs
-      .subscribe((res)=>{
+      .subscribe((res) => {
         if (res)
-        this.getData()});
+          this.getData()
+      });
   }
 
-  getData(){
+  getData() {
     this.personaSrv.obtenerInformes()
       .subscribe((res) => {
         console.log(res);
-        this.informes = res.Informes.map(x=> Object.assign(new Informe(), x));
-        this.informesFiltrados =  this.informes;
-    })
+        this.informes = res.Informes.map(x => Object.assign(new Informe(), x));
+        this.informesFiltrados = this.informes;
+      })
   }
 
-  buscar() {    
+  buscar() {
     this.informesFiltrados = Base.Filtrar(this.informes, this.strBuscar);
   }
-  
-  openModal(inf: Informe){
+
+  openModal(inf: Informe) {
     let informeCompleto: Informe;
     this.personaSrv.obtenerInformesPorId(inf.Id)
-      .subscribe((res)=>{
-        if(res.Informes){
-          informeCompleto = res.Informes.map(x=> Object.assign(new Informe(), x))[0];
+      .subscribe((res) => {
+        if (res.Informes) {
+          informeCompleto = res.Informes.map(x => Object.assign(new Informe(), x))[0];
           const modalRef = this.modalService.open(ModalComponent, { size: 'lg' });
           modalRef.componentInstance.estudio = informeCompleto;
         }
       }
       )
     console.log(inf.Id, + "  " + inf.Estudio);
+  }
 
+  key: string = 'FechaRealizacion';
+  reverse: boolean = false;
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
   }
 
 }

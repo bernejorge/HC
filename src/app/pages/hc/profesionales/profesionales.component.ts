@@ -9,6 +9,8 @@ import { PersonasService } from '../../../services/personas.service';
   styleUrls: ['./profesionales.component.css']
 })
 export class ProfesionalesComponent implements OnInit, OnDestroy {
+  p: number = 1;
+  cantidad: number = 10;
   turnos?: ITurno[];
   suscripcion: Subscription;
   constructor(private personaSrv: PersonasService ) { }
@@ -31,5 +33,10 @@ export class ProfesionalesComponent implements OnInit, OnDestroy {
         this.turnos = res.Turnos;
       })
   }
-
+  key: string= 'FechaAltaProblema';
+  reverse:boolean = false;
+  sort(key){
+   this.key =key;
+   this.reverse = !this.reverse;
+  }
 }

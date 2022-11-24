@@ -15,6 +15,8 @@ export class MotivoConsultaComponent implements OnInit, OnDestroy {
   public problemasFiltrados?: Problema[];
   public nombreProblema :any;
   private suscripcion: Subscription;
+  p: number = 1;
+  cantidad: number = 10;
   constructor(private personaSrv: PersonasService) { }
   ngOnDestroy(): void {
     this.suscripcion.unsubscribe();
@@ -46,12 +48,14 @@ export class MotivoConsultaComponent implements OnInit, OnDestroy {
   buscar(){     
    
       this.problemasFiltrados = Base.Filtrar(this.problemas,this.nombreProblema);
-      // this.problemasFiltrados = this.problemas.filter(
-      //   (p)=> {
-      //     return p.Problema.toLowerCase().match(this.nombreProblema.toLowerCase())
-      //   }
-      // );
     
+   }
+
+   key: string= 'FechaAltaProblema';
+   reverse:boolean = false;
+   sort(key){
+    this.key =key;
+    this.reverse = !this.reverse;
    }
  
 }

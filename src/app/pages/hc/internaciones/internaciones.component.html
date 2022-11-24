@@ -49,11 +49,11 @@
                                           </div>
                                           <div class='col'>
                                               <div class='form-group'>
-                                                  <select class='form-control'>
-                                                      <option value='' selected=''>10</option>
-                                                      <option value=''>25</option>
-                                                      <option value=''>50</option>
-                                                  </select>
+                                                <select class="form-control" type="number" [(ngModel)]="cantidad">
+                                                    <option [value]="10" selected="">10</option>
+                                                    <option [value]="25">25</option>
+                                                    <option [value]="50">50</option>
+                                                  </select> 
                                               </div>
                                           </div>
                                           <div class='col-auto control-label-between'>
@@ -78,14 +78,14 @@
                                   <table class='table'>
                                       <thead>
                                           <tr>
-                                              <th class="tableOrderBy--active">Motivo de internación <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                              <th class="tableOrderBy" width="125">Ingreso <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                              <th class="tableOrderBy" width="125">Egreso <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                              <th class="tableOrderBy" width="250">Servicio <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                              <th class="tableOrderBy text-center" width="75">Ver <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                              <th (click)="sort('MotivoInternacion')"  class="tableOrderBy--active">Motivo de internación <a style="cursor: pointer;"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                              <th (click)="sort('FechaIngreso')" class="tableOrderBy" width="125">Ingreso <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                              <th class="tableOrderBy" width="125">Egreso <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                              <th (click)="sort('NombreServicio')" class="tableOrderBy" width="250">Servicio <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                              <th class="tableOrderBy text-center" width="75">Ver <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                           </tr>
                                       </thead>
-                                      <tbody *ngFor="let e of episodiosFiltrados">
+                                      <tbody *ngFor="let e of episodiosFiltrados | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
                                           <tr>
                                               <td>{{e.MotivoInternacion}}</td>
                                               <td>{{e.FechaIngreso | date:'dd/MM/yyyy'}}</td>
@@ -95,10 +95,11 @@
                                           </tr>
                                           
                                       </tbody>
+                                      <pagination-controls class="my-pagination" previousLabel="Anterior" nextLabel="Proximo" (pageChange)="p = $event" ></pagination-controls>
                                   </table>
                               </div>
                           </div>
-                          <div class="col">
+                          <!-- <div class="col">
                               <nav class="componentePaginador">
                                   <ul class="pagination">
                                       <li class="page-item">
@@ -126,7 +127,7 @@
                                       </li>
                                   </ul>
                               </nav>
-                          </div>
+                          </div> -->
                       </div>
                   </div>
               </div>

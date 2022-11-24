@@ -1,5 +1,5 @@
 import { NgModule } from "@angular/core";
-import { CommonModule } from "@angular/common";
+import { CommonModule, DatePipe } from "@angular/common";
 import { MainComponent } from "./main/main.component";
 import { HcRoutingModule } from "./hc-routing.module";
 import { ResumenClinicoComponent } from "./resumen-clinico/resumen-clinico.component";
@@ -20,6 +20,9 @@ import { InternacionModalComponent } from './internaciones/internacion-modal/int
 import { CardMedicamentosComponent } from './footer/card-medicamentos/card-medicamentos.component';
 import { CardProfesionalesComponent } from './footer/card-profesionales/card-profesionales.component';
 import { CardEstudiosComponent } from './footer/card-estudios/card-estudios.component';
+import { ChartModule } from "angular-highcharts";
+import {NgxPaginationModule} from 'ngx-pagination';
+import { Ng2OrderModule } from 'ng2-order-pipe';
 
 @NgModule({
   imports: [
@@ -28,8 +31,11 @@ import { CardEstudiosComponent } from './footer/card-estudios/card-estudios.comp
     FormsModule,
     HcRoutingModule,
     SpinnerModule,
-    
+    ChartModule,
+    Ng2OrderModule, 
+    NgxPaginationModule
   ],
+  providers: [DatePipe],
   declarations: [
     MainComponent,
     ResumenClinicoComponent,
@@ -38,7 +44,6 @@ import { CardEstudiosComponent } from './footer/card-estudios/card-estudios.comp
     SidebarComponent,
     MotivoConsultaComponent,
     ProfesionalesComponent,
-
     ResultadosEstudiosComponent,
     MedicamentosComponent,
     InternacionesComponent,

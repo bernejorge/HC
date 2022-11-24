@@ -16,21 +16,21 @@
                               </div>
                               <div class="col filtroResultados__switch">
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-pildora fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Activos / Vencidos</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-pildora fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Suspendidos</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
                                       </a>
                                   </div>
                                   <div class='badge active'>
-                                      <a href="#">
+                                      <a >
                                           <i class="fa fa-svg fa-pildora fa-fw badge__icon" aria-hidden="true"></i>
                                           <p class="badge__label">Finalizados</p>
                                           <i class="fa fa-fw badge__status" aria-hidden="true"></i>
@@ -51,11 +51,11 @@
                                       </div>
                                       <div class='col'>
                                           <div class='form-group'>
-                                              <select class='form-control'>
-                                                  <option value='' selected=''>10</option>
-                                                  <option value=''>25</option>
-                                                  <option value=''>50</option>
-                                              </select>
+                                            <select class="form-control" type="number" [(ngModel)]="cantidad">
+                                                <option [value]="10" selected="">10</option>
+                                                <option [value]="25">25</option>
+                                                <option [value]="50">50</option>
+                                              </select> 
                                           </div>
                                       </div>
                                       <div class='col-auto control-label-between'>
@@ -80,17 +80,17 @@
                               <table class='table tablaPrescripcionMedicamentos'>
                                   <thead>
                                       <tr>
-                                          <th class="tableOrderBy--active">Prescripción <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy">Renovación <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy">Nombre <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy">Trat. prolongado <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
-                                          <th class="tableOrderBy text-center" width="125">Estado <a href="#"><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th (click)="sort('FechaMostrar')" class="tableOrderBy--active">Prescripción <a><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy">Renovación <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy">Nombre <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy">Trat. prolongado <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
+                                          <th class="tableOrderBy text-center" width="125">Estado <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                       </tr>
                                   </thead>
-                                  <tbody *ngFor="let p of prescripcionesFiltradas">
+                                  <tbody *ngFor="let p of prescripcionesFiltradas | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
                                       <tr class="{{p.obtenerClass()}}">
-                                          <td>{{p.FechaMostrar | date}}</td>
-                                          <td>{{p.Fecha | date}}</td>
+                                          <td>{{p.FechaMostrar | date:'dd/MM/yyyy'}}</td>
+                                          <td>{{p.Fecha | date:'dd/MM/yyyy'}}</td>
                                           <td>{{p.Nombre}}</td>
                                           <td>{{p.TratamientoProlongado ? 'Si' : 'No'}}</td>
                                           <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{p.EstadoPrescripcion}}" class="fa fa-svg fa-pildora fa-fw"></i></td>
@@ -124,38 +124,39 @@
                                           <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Activo" class="fa fa-svg fa-pildora fa-fw"></i></td>
                                       </tr> -->
                                   </tbody>
+                                  <pagination-controls class="my-pagination" previousLabel="Anterior" nextLabel="Proximo" (pageChange)="p = $event" ></pagination-controls>
                               </table>
                           </div>
                       </div>
-                      <div class="col">
+                      <!-- <div class="col">
                           <nav class="componentePaginador">
                               <ul class="pagination">
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Previous">
+                                      <a class="page-link"  aria-label="Previous">
                                           <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                                       </a>
                                   </li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Previous">
+                                      <a class="page-link"  aria-label="Previous">
                                           <i class="fa fa-angle-left" aria-hidden="true"></i>
                                       </a>
                                   </li>
-                                  <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                  <li class="page-item active"><a class="page-link" >1</a></li>
+                                  <li class="page-item"><a class="page-link" >2</a></li>
+                                  <li class="page-item"><a class="page-link" >3</a></li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Next">
+                                      <a class="page-link"  aria-label="Next">
                                           <i class="fa fa-angle-right" aria-hidden="true"></i>
                                       </a>
                                   </li>
                                   <li class="page-item">
-                                      <a class="page-link" href="#" aria-label="Next">
+                                      <a class="page-link"  aria-label="Next">
                                           <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                       </a>
                                   </li>
                               </ul>
                           </nav>
-                      </div>
+                      </div> -->
                   </div>
               </div>
           </div>

@@ -14,8 +14,10 @@ export class MedicamentosComponent implements OnInit, OnDestroy {
 
   prescripciones?: Prescripcion[];
   prescripcionesFiltradas?: Prescripcion[];
-  strBuscar :any;
-  
+  strBuscar: any;
+  p: number = 1;
+  cantidad: number = 10;
+
   suscripcion: Subscription;
 
   constructor(private personaSrv: PersonasService) { }
@@ -25,24 +27,31 @@ export class MedicamentosComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.suscripcion = this.personaSrv.$personaSeleccionadaObs
-      .subscribe((res)=>{
+      .subscribe((res) => {
         if (res)
-        this.getData()});
-    
+          this.getData()
+      });
+
   }
 
-  getData(){
+  getData() {
     this.personaSrv.obtenerMedicacion()
-    .subscribe((res:RespuestaPrescripcion)=>{
+      .subscribe((res: RespuestaPrescripcion) => {
         console.log(res);
-        this.prescripciones = res.Prescripciones.map(x=> Object.assign(new Prescripcion(),x));
+        this.prescripciones = res.Prescripciones.map(x => Object.assign(new Prescripcion(), x));
         this.prescripcionesFiltradas = this.prescripciones;
-        
-    });
+
+      });
   }
 
-  buscar(){
-    if(this.prescripciones) this.prescripcionesFiltradas = Base.Filtrar(this.prescripciones, this.strBuscar);
+  buscar() {
+    if (this.prescripciones) this.prescripcionesFiltradas = Base.Filtrar(this.prescripciones, this.strBuscar);
   }
 
+  key: string = 'FechaAltaProblema';
+  reverse: boolean = true;
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
 }

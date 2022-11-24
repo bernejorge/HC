@@ -19,7 +19,7 @@
               </p>
             </div>
             <div class="col-auto alert__close">
-              <a href="#">
+              <a >
                 <i class="fa fa-times fa-fw" aria-hidden="true"></i>
               </a>
             </div>
@@ -47,11 +47,11 @@
                     </div>
                     <div class="col">
                       <div class="form-group">
-                        <select class="form-control">
-                          <option value="" selected="">10</option>
-                          <option value="">25</option>
-                          <option value="">50</option>
-                        </select>
+                        <select class="form-control" type="number" [(ngModel)]="cantidad">
+                          <option [value]="10" selected="">10</option>
+                          <option [value]="25">25</option>
+                          <option [value]="50">50</option>
+                        </select>                        
                       </div>
                     </div>
                     <div class="col-auto control-label-between">
@@ -80,16 +80,16 @@
                     <tr>
                       <th class="tableOrderBy">
                         Motivo
-                        <a href="#"
+                        <a 
                           ><i
                             class="fa fa-sort-amount-asc fa-fw"
                             aria-hidden="true"
                           ></i
                         ></a>
                       </th>
-                      <th class="tableOrderBy--active">
+                      <th (click)="sort('FechaAltaProblema')" class="tableOrderBy--active">
                         Primer consulta
-                        <a href="#"
+                        <a 
                           ><i
                             class="fa fa-sort-amount-asc fa-fw"
                             aria-hidden="true"
@@ -98,7 +98,7 @@
                       </th>
                       <th class="tableOrderBy">
                         Última consulta
-                        <a href="#"
+                        <a 
                           ><i
                             class="fa fa-sort-amount-asc fa-fw"
                             aria-hidden="true"
@@ -108,13 +108,14 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let p of problemasFiltrados">
+                    <tr *ngFor="let p of problemasFiltrados | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
                       <td>{{p.Problema}}</td>
                       <td>{{p.FechaAltaProblema | date:'dd/MM/yyyy'}}</td>
                       <td>{{validateDate(p.FechaUltimaEvolucion) | date:'dd/MM/yyyy'}}</td>
                     </tr>
                     
                   </tbody>
+                  <pagination-controls class="my-pagination" previousLabel="Anterior" nextLabel="Proximo" (pageChange)="p = $event" ></pagination-controls>
                 </table>
               </div>
             </div>
@@ -122,27 +123,27 @@
               <nav class="componentePaginador">
                 <ul class="pagination">
                   <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link"  aria-label="Previous">
                       <i class="fa fa-angle-double-left" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
+                    <a class="page-link"  aria-label="Previous">
                       <i class="fa fa-angle-left" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="page-item active">
-                    <a class="page-link" href="#">1</a>
+                    <a class="page-link" >1</a>
                   </li>
-                  <li class="page-item"><a class="page-link" href="#">2</a></li>
-                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item"><a class="page-link" >2</a></li>
+                  <li class="page-item"><a class="page-link" >3</a></li>
                   <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link"  aria-label="Next">
                       <i class="fa fa-angle-right" aria-hidden="true"></i>
                     </a>
                   </li>
                   <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
+                    <a class="page-link"  aria-label="Next">
                       <i
                         class="fa fa-angle-double-right"
                         aria-hidden="true"
@@ -152,7 +153,7 @@
                 </ul>
               </nav>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

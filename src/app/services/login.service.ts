@@ -37,9 +37,28 @@ export class LoginService {
   }
   private saveToken(token: string): void {
     localStorage.setItem('AccessToken', token);
+    localStorage.setItem('LastVisit', new Date().getTime().toString());    
   }
   public getToken(): string | null {
     return localStorage.getItem('AccessToken');
+  }
+
+  public logout(): void {
+    localStorage.removeItem('AccessToken');
+    localStorage.removeItem('LastVisit');
+    //Todo: llamar al metodo logout del backend
+  }
+  public isLoggedIn():boolean {
+    let lastV = localStorage.getItem('LastVisit');
+    if (this.getToken() && lastV){
+      try {
+        const dateDiff = new Date().getTime() - Number(lastV); 
+        const tolerenciaMinutos =  10 * 1000 * 60; // 10 minutes
+        return dateDiff < tolerenciaMinutos;
+      } catch (error) {
+        return false
+      }      
+    }else return false;
   }
  
 }

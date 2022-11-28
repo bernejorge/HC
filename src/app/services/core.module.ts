@@ -6,6 +6,7 @@ import { MenuService } from './menu.service';
 import { SpinnerService } from './spinner.service';
 import { FormsModule } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { SesionPermisosGuard } from '../guards/sesion-permisos.guard';
 
 @NgModule({
     imports: [
@@ -21,6 +22,8 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
         SpinnerService,
         FormsModule,
         NgbActiveModal,
+        SesionPermisosGuard,
+
     ]
 })
 export class CoreModule { }

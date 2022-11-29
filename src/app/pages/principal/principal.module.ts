@@ -4,6 +4,7 @@ import { PrincipalComponent } from './principal.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginModule } from '../login/login.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { RegistrarseModalComponent } from './registrarse-modal/registrarse-modal.component';
 
 const appRoutes: Routes = [
   {path: '', component: PrincipalComponent}
@@ -16,7 +17,7 @@ const appRoutes: Routes = [
     RouterModule.forChild(appRoutes),
     ReactiveFormsModule
   ],
-  declarations: [PrincipalComponent],
+  declarations: [PrincipalComponent, RegistrarseModalComponent],
   exports:[
   	PrincipalComponent,
   ]

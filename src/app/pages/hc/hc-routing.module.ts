@@ -8,9 +8,10 @@ import { InternacionesComponent } from './internaciones/internaciones.component'
 import { ProfesionalesComponent } from './profesionales/profesionales.component';
 import { MedicamentosComponent } from './medicamentos/medicamentos.component';
 import { ResultadosEstudiosComponent } from './resultados-estudios/resultados-estudios.component';
+import { SesionPermisosGuard } from '../../guards/sesion-permisos.guard';
 
 const rutas: Routes = [
-  {path: '', component:MainComponent,
+  {path: '', component:MainComponent, canActivateChild: [SesionPermisosGuard],
     children: [
       {path:'', redirectTo:'resumen', pathMatch: 'full'},
       {path:'resumen', component:ResumenClinicoComponent},
@@ -19,7 +20,6 @@ const rutas: Routes = [
       {path: 'medicamentos', component:MedicamentosComponent},
       {path: 'resultados', component: ResultadosEstudiosComponent},
       {path: 'internaciones', component:InternacionesComponent},
-
     ],}
 ];
 

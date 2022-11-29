@@ -19,18 +19,18 @@ import { SpinnerModule } from './pages/spinner/spinner.module';
 import { SpinnerInterceptor } from './iterceptors/spinner-interceptor';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SesionPermisosGuard } from './guards/sesion-permisos.guard';
 
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
   { path: 'home', loadChildren: "./pages/principal/principal.module#PrincipalModule" },
   { path: 'login',  loadChildren:"./pages/login/login.module" },
-  { path: 'main', loadChildren: "./pages/hc/hc.module#HcModule"}
+  { path: 'main', loadChildren: "./pages/hc/hc.module#HcModule", canActivate:[SesionPermisosGuard]}
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-
   ],
   imports: [ 
     RouterModule.forRoot(appRoutes),

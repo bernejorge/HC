@@ -16,7 +16,7 @@ export class MainComponent implements OnInit, OnDestroy {
 
   }
   ngOnDestroy(): void {
-    throw new Error('Method not implemented.');
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {

@@ -23,7 +23,7 @@ import { CardEstudiosComponent } from './footer/card-estudios/card-estudios.comp
 import { ChartModule } from "angular-highcharts";
 import {NgxPaginationModule} from 'ngx-pagination';
 import { Ng2OrderModule } from 'ng2-order-pipe';
-import { EstudiosImgenComponent } from './resultados-estudios-modales/estudios-imgen/estudios-imgen.component';
+import { EstudiosImgenComponent } from './resultados-estudios-modales/estudios-imagen/estudios-imgen.component';
 
 @NgModule({
   imports: [

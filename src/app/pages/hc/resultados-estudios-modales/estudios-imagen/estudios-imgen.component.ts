@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Informe } from '../../../../Models/Informe';
 
 @Component({
   selector: 'app-estudios-imgen',
@@ -6,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./estudios-imgen.component.css']
 })
 export class EstudiosImgenComponent implements OnInit {
-
+  @Input() estudio : Informe;
   constructor() { }
 
   ngOnInit() {

@@ -138,13 +138,13 @@
                                               <th class="text-center">Informe</th>
                                           </tr>
                                       </thead>
-                                      <tbody>
+                                      <tbody *ngFor="let i of informes">
                                           <tr>
-                                              <td>00-00-0000</td>
-                                              <td>LAB - Análisis de orina</td>
-                                              <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalEstudios"><i class="fa fa-flask fa-fw" aria-hidden="true"></i></a></td>
+                                            <td>{{i.FechaRealizacion | date:'dd/MM/yyyy' }}</td>
+                                            <td>{{i.Estudio}}</td>
+                                            <td style="cursor: pointer;" class="text-center"(click)="openModal(i)" ><i class= "{{i.getClass()}} fa-fw" aria-hidden="true"></i></td>
                                           </tr>
-                                          <tr>
+                                          <!-- <tr>
                                               <td>00-00-0000</td>
                                               <td>LAB - Quimica clinica (sangre)</td>
                                               <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalEstudios"><i class="fa fa-flask fa-fw" aria-hidden="true"></i></a></td>
@@ -163,7 +163,7 @@
                                               <td>00-00-0000</td>
                                               <td>Biopsia de riñon</td>
                                               <td class="text-center"><a href="#" data-toggle="modal" data-target="#modalEstudios"><i class="fa fa-medkit fa-fw" aria-hidden="true"></i></a></td>
-                                          </tr>
+                                          </tr> -->
                                       </tbody>
                                   </table>
                               </div>
@@ -197,14 +197,14 @@
                                               <th class="text-center">Estado</th>
                                           </tr>
                                       </thead>
-                                      <tbody>
-                                          <tr class="estadoPrescripcion--activo">
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
-                                              <td>Losartán 50 mg</td>
-                                              <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Activo" class="fa fa-svg fa-pildora fa-fw"></i></td>
+                                      <tbody *ngFor="let p of prescripciones">
+                                          <tr class="{{p.obtenerClass()}}">
+                                            <td>{{p.FechaMostrar | date:'dd/MM/yyyy'}}</td>
+                                            <td>{{p.Fecha | date:'dd/MM/yyyy'}}</td>
+                                            <td>{{p.Nombre}}</td>
+                                            <td class="text-center"><i aria-hidden="true" data-toggle="tooltip" data-placement="top" title="{{p.EstadoPrescripcion}}" class="fa fa-svg fa-pildora fa-fw"></i></td>
                                           </tr>
-                                          <tr class="estadoPrescripcion--indefinido">
+                                          <!-- <tr class="estadoPrescripcion--indefinido">
                                               <td>00-00-0000</td>
                                               <td>-</td>
                                               <td>Allupurinol 100 mg</td>
@@ -227,7 +227,7 @@
                                               <td>00-00-0000</td>
                                               <td>Espironolactona</td>
                                               <td class="text-center"><i class="fa fa-svg fa-pildora fa-fw" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Activo"></i></td>
-                                          </tr>
+                                          </tr> -->
                                       </tbody>
                                   </table>
                               </div>

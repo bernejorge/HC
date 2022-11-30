@@ -1,12 +1,17 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Chart } from 'angular-highcharts';
 import { Subscription } from 'rxjs';
 import { Base } from '../../../Models/BaseModel';
 import { Episodio } from '../../../Models/Episodio';
+import { Informe } from '../../../Models/Informe';
+import { Prescripcion } from '../../../Models/Prescripcion';
+import { RespuestaPrescripcion } from '../../../Models/RespuestasInterfaces';
 import { SignosVitales } from '../../../Models/SignosVitales';
 import { PersonasService } from '../../../services/personas.service';
 import { SpinnerService } from '../../../services/spinner.service';
+import { ModalComponent } from '../resultados-estudios-modales/modal/modal.component';
 
 
 @Component({
@@ -14,7 +19,7 @@ import { SpinnerService } from '../../../services/spinner.service';
   templateUrl: './resumen-clinico.component.html',
   styleUrls: ['./resumen-clinico.component.css']
 })
-export class ResumenClinicoComponent implements OnInit {
+export class ResumenClinicoComponent implements OnInit, OnDestroy {
 
   signos?: SignosVitales[];
   suscripcion: Subscription;
@@ -24,8 +29,14 @@ export class ResumenClinicoComponent implements OnInit {
   chart: Chart;
   categorias: string[];
   episodios?: Episodio[];
+  prescripciones?: Prescripcion[];
+  informes?: Informe[];
 
-  constructor(private personaSrv: PersonasService, public datepipe: DatePipe) { }
+  constructor(private personaSrv: PersonasService, public datepipe: DatePipe, private modalService: NgbModal) { }
+  
+  ngOnDestroy(): void {
+    this.suscripcion.unsubscribe();
+  }
 
   ngOnInit() {
     this.suscripcion = this.personaSrv.$personaSeleccionadaObs
@@ -37,15 +48,56 @@ export class ResumenClinicoComponent implements OnInit {
   getData() {
     this.cargarSignosVitales();
     this.cargarInternaciones();
-
+    this.cargarMedicamentos();
+    this.cargarEstudios();
   }
-  validateDate(date:string):string {
+  validateDate(date: string): string {
     return Base.validateDate(date);
   }
+  cargarMedicamentos() {
+    this.personaSrv.obtenerMedicacion()
+      .subscribe((res: RespuestaPrescripcion) => {
+        console.log(res);
+        this.prescripciones = res.Prescripciones.map(x => Object.assign(new Prescripcion(), x))
+          .sort((a, b) => {
+            return new Date(b.Fecha).getTime() - new Date(a.Fecha).getTime();
+          }) //ordernados mas nuevos primeros
+          .slice(0,10); //solo 10 registros
+      });
+  }
+
+  cargarEstudios(){
+    this.personaSrv.obtenerInformes()
+      .subscribe((res) => {
+        console.log(res);
+        this.informes = res.Informes.map(x => Object.assign(new Informe(), x))
+          .sort((a, b) => {
+            return new Date(b.FechaRealizacion).getTime() - new Date(a.FechaRealizacion).getTime();
+          }) //ordernados mas nuevos primeros
+          .slice(0,10); //solo 10 registros
+      });
+  }
+
+  openModal(inf: Informe) {
+    let informeCompleto: Informe;
+    this.personaSrv.obtenerInformesPorId(inf.Id)
+      .subscribe((res) => {
+        if (res.Informes) {
+          console.log(res);
+          informeCompleto = res.Informes.map(x => Object.assign(new Informe(), x))[0];
+          const modalRef = this.modalService.open(ModalComponent, { size: 'lg' });
+          modalRef.componentInstance.estudio = informeCompleto;
+        }
+      }
+      )
+    console.log(inf.Id, + "  " + inf.Estudio);
+  }
+
   cargarInternaciones() {
     this.personaSrv.obtenerEpisodios()
       .subscribe(
         (res) => {
+          console.log(res);
           this.episodios = res.Episodios.map(x => Object.assign(new Episodio(), x));
           if (this.episodios) {
             this.episodios = this.episodios.slice(-10)

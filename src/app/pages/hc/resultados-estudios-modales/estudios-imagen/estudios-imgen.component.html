@@ -2,22 +2,21 @@
   <div class="panel-body table-responsive no-border">
     <span> </span><span> </span><span> </span><span> </span><span> </span
     ><span> </span><span> </span><span> </span><span> </span>
-    <table class="table table-hover table-striped table-condensed" *ngIf="estudio.Laboratorio?.length">
+    <table class="table table-hover table-striped table-condensed" *ngIf="estudio.Imagen?.length">
       <thead>
         <tr>
           <th>Descripción</th>
           <th>Valor</th>
           <th>Unidad</th>
-          <th>Valor normal</th>
+          
         </tr>
       </thead>
 
       <tbody >
-        <tr class="estudios_lab" *ngFor="let l of estudio.Laboratorio">
-          <td style="white-space: pre-wrap">{{l.Descripcion}}</td>
-          <td style="white-space: pre-wrap">{{l.Valor}}</td>
-          <td style="white-space: pre-wrap">{{l.Unidad}}/l</td>
-          <td style="white-space: pre-wrap">{{l.ValorNormal}}</td>
+        <tr class="estudios_lab" *ngFor="let i of estudio.Imagen">
+          <td style="white-space: pre-wrap">{{i.DeterminacionNombre}}</td>
+          <td style="white-space: pre-wrap">{{i.Valor}}</td>
+          <td style="white-space: pre-wrap">{{i.Referencia}}</td>          
         </tr>
         
       </tbody>

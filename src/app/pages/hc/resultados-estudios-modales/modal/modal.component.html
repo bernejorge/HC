@@ -23,7 +23,9 @@
     <app-estudios-lab [estudio]="estudio"></app-estudios-lab>
   </ng-container>
 
-  
+  <ng-container *ngIf="estudio?.Imagen?.length>0">
+    <app-estudios-imgen [estudio]="estudio"></app-estudios-imgen>
+  </ng-container>
 
 </div>
 <div class="modal-footer">

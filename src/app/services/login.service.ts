@@ -15,13 +15,17 @@ export class LoginService {
   prueba(){
     window.alert("hola");
   }
-
+getHttpHeaders(): HttpHeaders {
+  return  new HttpHeaders({
+      'Content-Type': 'application/x-www-form-urlencoded',
+      'Accept': 'application/json'
+    });   
+  
+   
+}
   login(username: string, password: string ): Observable<any> {
     let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'Accept': 'application/json'
-      })
+      headers: this.getHttpHeaders(),
     };
     let body = `Usuario=${username}&Password=${password}&LoginUnico=true&IdTipoVinculo=2&ClientToken=333`;
     return this.http.post(`${environment.API_URL}/api/Sesion/Login`, body, httpOptions)
@@ -60,5 +64,8 @@ export class LoginService {
       }      
     }else return false;
   }
- 
+ public registarse(tipoDocumento: string, documento: string, nacimiento: string): void {
+
+
+ }
 }

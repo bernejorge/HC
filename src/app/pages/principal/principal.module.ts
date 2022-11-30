@@ -20,7 +20,7 @@ const appRoutes: Routes = [
   declarations: [PrincipalComponent, RegistrarseModalComponent],
   exports:[
   	PrincipalComponent,
-  ]
-  
+  ],
+  entryComponents: [RegistrarseModalComponent],
 })
 export class PrincipalModule { }

@@ -10,13 +10,22 @@ import { Informe } from '../../../../Models/Informe';
 export class ModalComponent implements OnInit {
 
   @Input() estudio : Informe;
+  titulo: string = '';
   constructor(public activeModal: NgbActiveModal) { 
     
   }
 
 
   ngOnInit() {
-    
+    if (this.estudio){
+      if(this.estudio.NombrePlantilla!==null && this.estudio.NombrePlantilla !== ''){
+        this.titulo= this.estudio.NombrePlantilla;
+      } else if(this.estudio!==null){
+        this.titulo= this.estudio.Estudio;
+      }else{
+        this.titulo= "";
+      }
+    }
   }
 
 }

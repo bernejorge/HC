@@ -5,6 +5,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from '../../services/login.service';
 import { PersonasService } from '../../services/personas.service';
 import { LoginComponent } from '../login/login.component';
+import { RegistrarseModalComponent } from './registrarse-modal/registrarse-modal.component';
 
 
 @Component({
@@ -51,6 +52,12 @@ export class PrincipalComponent implements OnInit {
 			this.loginForm.controls.password.value)
 			.subscribe(LoginObserver);
 		//this.mymodalIsOpen=false;
+	}
+
+	openModalResgistrar(){
+		const modalRef = this.modalService.open(RegistrarseModalComponent, { size: 'lg' });
+        
+
 	}
 
 }

@@ -53,6 +53,7 @@ export class ResultadosEstudiosComponent implements OnInit, OnDestroy {
     this.personaSrv.obtenerInformesPorId(inf.Id)
       .subscribe((res) => {
         if (res.Informes) {
+          console.log(res);
           informeCompleto = res.Informes.map(x => Object.assign(new Informe(), x))[0];
           const modalRef = this.modalService.open(ModalComponent, { size: 'lg' });
           modalRef.componentInstance.estudio = informeCompleto;

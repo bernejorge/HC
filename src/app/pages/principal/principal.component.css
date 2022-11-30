@@ -111,6 +111,8 @@ p {
   border-right: 1px solid #fff;
   padding: 0px 22px;
   width: 59%;
+  align-items: center;
+  display: flex;
 }
 
 .logo {

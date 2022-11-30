@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-registrarse-modal',
@@ -7,7 +9,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrarseModalComponent implements OnInit {
 
-  constructor() { }
+  resgistrationForm = this.fb.group({
+		docnumber: [''],
+		nac: [''],
+	  });
+  constructor(public activeModal: NgbActiveModal, private fb: FormBuilder) { }
 
   ngOnInit() {
   }

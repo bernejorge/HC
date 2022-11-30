@@ -95,36 +95,17 @@
                                       <thead>
                                           <tr>
                                               <th>Motivo</th>
-                                              <th>Primera consulta</th>
-                                              <th>Última consulta</th>
+                                              <th>Ingreso</th>
+                                              <th>Egreso</th>
                                           </tr>
                                       </thead>
-                                      <tbody>
+                                      <tbody *ngFor="let e of episodios">
                                           <tr>
-                                              <td>Bocio</td>
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
+                                              <td>{{e.MotivoInternacion}}</td>
+                                              <td>{{e.FechaIngreso | date:'dd/MM/yyyy'}}</td>
+                                              <td>{{validateDate(e.FechaDeAltaAdm) | date:'dd/MM/yyyy'}}</td>
                                           </tr>
-                                          <tr>
-                                              <td>Ruptura tendón aquiles</td>
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Valoración preoperatoria</td>
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Glomerulonefritis</td>
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
-                                          </tr>
-                                          <tr>
-                                              <td>Gastroenteritis</td>
-                                              <td>00-00-0000</td>
-                                              <td>00-00-0000</td>
-                                          </tr>
+                                          
                                       </tbody>
                                   </table>
                               </div>

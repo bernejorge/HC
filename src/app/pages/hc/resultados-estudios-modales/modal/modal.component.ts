@@ -27,5 +27,8 @@ export class ModalComponent implements OnInit {
       }
     }
   }
+  addTituloHijo(subTitulo: string){
+    this.titulo= this.titulo + " " + subTitulo;
+  }
 
 }

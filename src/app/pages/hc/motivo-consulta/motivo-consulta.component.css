@@ -1,6 +1,0 @@
-.my-pagination ::ng-deep .ngx-pagination .current {
-    background: red;
-  }
-.my-pagination.span{
-    background: red;
-}

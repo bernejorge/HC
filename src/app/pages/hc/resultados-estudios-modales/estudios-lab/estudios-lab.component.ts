@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Informe } from '../../../../Models/Informe';
 
 @Component({
@@ -9,6 +9,7 @@ import { Informe } from '../../../../Models/Informe';
 export class EstudiosLabComponent implements OnInit {
 
   @Input() estudio : Informe;
+  @Output() miTitulo = new EventEmitter<string>();
   constructor() { 
     
   }

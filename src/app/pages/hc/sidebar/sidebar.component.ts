@@ -74,4 +74,7 @@ export class SidebarComponent implements OnInit {
     console.log("Click en el menu toggle!");
     this.menuSrv.menuToggle();
   }
+  goToLink(url: string){
+    window.open(url, "_blank");
+}
 }

@@ -1,8 +1,8 @@
 <div class="modal-header">
   <h4 class="modal-title" id="modalEstudiosHP">
-    {{titulo}}
+    {{titulo | uppercase }}
   </h4>
-  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+  <button type="button" class="close" aria-label="Cerrar" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
   <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
@@ -12,7 +12,7 @@
     <div class="col-md-6 col-xs-12 nombrePersona"><b>Nombre:</b>{{estudio.NombrePersona}}</div>
     <div class="col-md-3 col-xs-6"><b>Sexo:</b> {{estudio.Sexo}}</div>
     <div class="col-md-3 col-xs-6"><b>Edad:</b> {{estudio.Edad}}</div>
-    <div class="col-md-6 col-xs-12"><b>Informe:</b> {{estudio.Estudio}}</div>
+    <div class="col-md-6 col-xs-12 nombrePersona"><b>Informe:</b> {{estudio.Estudio}}</div>
     <div class="col-md-6 col-xs-12"><b>Fecha:</b> {{estudio.FechaRealizacion | date: 'dd/MM/yyyy'}}</div>
   </div>
   <div *ngIf="estudio == undefined" class="row">
@@ -23,8 +23,8 @@
     <app-estudios-lab [estudio]="estudio"></app-estudios-lab>
   </ng-container>
 
-  <ng-container *ngIf="estudio?.Imagen?.length>0">
-    <app-estudios-imgen [estudio]="estudio"></app-estudios-imgen>
+  <ng-container *ngIf="estudio?.Imagen?.length>0" >
+    <app-estudios-imgen [estudio]="estudio" (miTitulo)="addTituloHijo($event)"></app-estudios-imgen>
   </ng-container>
 
 </div>

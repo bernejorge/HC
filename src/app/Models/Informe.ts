@@ -36,6 +36,7 @@ export interface Imagen {
     Valor: string;
     Referencia: string;
     Modalidad: string;
+    IdDeterminacionTipoValor: number;
 }
 
 export interface Laboratorio {

@@ -1,7 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { Epicrisis } from '../../../../Models/Epicrisis';
+import {  EpicrisisClass } from '../../../../Models/Epicrisis';
 import { Episodio } from '../../../../Models/Episodio';
+import { RespuestaEpicrisis } from '../../../../Models/RespuestasInterfaces';
 
 @Component({
   selector: 'app-internacion-modal',
@@ -10,7 +11,7 @@ import { Episodio } from '../../../../Models/Episodio';
 })
 export class InternacionModalComponent implements OnInit {
 
-  @Input() Epicrisises : Epicrisis[];
+  @Input() Epicrisises : EpicrisisClass[];
 
   constructor(public activeModal: NgbActiveModal) { }
 

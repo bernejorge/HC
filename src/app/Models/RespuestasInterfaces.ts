@@ -1,4 +1,5 @@
-import { Epicrisis } from "./Epicrisis";
+
+import { EpicrisisInterface } from "./Epicrisis";
 import { Episodio } from "./Episodio";
 import { Informe } from "./Informe";
 import { Mensaje } from "./Mensaje";
@@ -63,7 +64,7 @@ export interface RespuestaEpisodios {
 }
 
 export interface RespuestaEpicrisis {
-    Epicrisis: Epicrisis[];
+    Epicrisis: EpicrisisInterface[];
     Codigo: number;
     Mensaje: string;
     IdRequest: string;

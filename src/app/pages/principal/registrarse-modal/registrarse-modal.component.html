@@ -12,7 +12,9 @@
 <div class="modal-body row">
   <div class="col-md-8 col-md-push-2" style="text-align: right">
     <p>
-      Si usted es paciente de nuestra institución, es necesario generar su usuario con la dirección de correo electrónico con la que esta empadronado.
+      Si usted es paciente de nuestra institución, es necesario generar su
+      usuario con la dirección de correo electrónico con la que esta
+      empadronado.
     </p>
     <p>Si no lo recuerda, llame al 030345666</p>
   </div>
@@ -34,7 +36,9 @@
         />
       </div>
       <div class="form-group">
-        <label for="loginPassword" class="control-label">Fecha Nacimiento:</label>
+        <label for="loginPassword" class="control-label"
+          >Fecha Nacimiento:</label
+        >
         <input
           formControlName="nac"
           type="date"
@@ -58,7 +62,7 @@
     <button
       type="button"
       class="btn btn-success2 enviarLoginHCW"
-      (click)="ingresar()"
+      (click)="regitrarse()"
     >
       <span
         id="loadingIconIngreso"
@@ -67,4 +71,5 @@
       ></span>
       Ingresar
     </button>
+  </div>
 </div>

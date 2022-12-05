@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router, CanActivateChild } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { LoginService } from '../services/login.service';
+import Swal from 'sweetalert2';
 
 @Injectable()
 export class SesionPermisosGuard implements CanActivate, CanActivateChild  {
@@ -13,7 +14,12 @@ export class SesionPermisosGuard implements CanActivate, CanActivateChild  {
     const result = this.LoginSrv.isLoggedIn()
     
     if(!result){
-      alert("Su sesion a expirado");
+      
+      Swal({
+        title: 'Error',
+        text: 'Su sesion ha exirado',
+        type: 'error'
+       })
       this.router.navigate(['/home']);
       return false;
     }      

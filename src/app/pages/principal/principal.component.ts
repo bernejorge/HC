@@ -41,10 +41,10 @@ export class PrincipalComponent implements OnInit {
 				//this.activeModal.close();
 				this.router.navigate(['/main']);
 			},
-			error: (x) => {
-				console.error(x);
-				window.alert("Error: " + x.message);
-			}
+			// error: (x) => {
+			// 	console.error(x);
+			// 	window.alert("Error: " + x.message);
+			// }
 
 		}
 		console.log(this.loginForm.controls.username.value);

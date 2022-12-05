@@ -39,6 +39,14 @@ getHttpHeaders(): HttpHeaders {
         })
       );
   }
+  public registarse(tipoDocumento: string, documento: string, nacimiento: string): Observable<any> {
+
+    let httpOptions = {
+      headers: this.getHttpHeaders(),
+    };
+    let body = 'Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}';
+    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, body, httpOptions);
+   }
   private saveToken(token: string): void {
     localStorage.setItem('AccessToken', token);
     localStorage.setItem('LastVisit', new Date().getTime().toString());    
@@ -64,8 +72,5 @@ getHttpHeaders(): HttpHeaders {
       }      
     }else return false;
   }
- public registarse(tipoDocumento: string, documento: string, nacimiento: string): void {
 
-
- }
 }

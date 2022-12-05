@@ -1,0 +1,38 @@
+<section id="contenido">
+  <section class="HCOnline home-login">
+      <main class="container-fluid">
+          <div class="row">
+              <div class="col d-flex align-items-center bg">
+                  <div class="registro"></div>
+              </div>
+              <div class="col-md-4 formAcceso formAcceso__derecha d-flex justify-content-center align-items-center">
+                  <div class="inicio-sesion">
+                      <div class="logo">
+                          <picture>
+                              <img src="./client/HospitalPrivado/isologotypeMonotone.png" alt="Logotipo" class="w-50">
+                          </picture>
+                      </div>
+                      <h3>Verificación de seguridad</h3>
+                      <form>
+                          <div class="form-group">
+                              <label for="codigo">Código de verificación</label>
+                              <div class="insertCodigo d-flex justify-content-between">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 1" pattern="[0-9]*" value="" id="digit-1" rows="1" required="">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 2" pattern="[0-9]*" value="" id="digit-2" rows="1" required="">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 3" pattern="[0-9]*" value="" id="digit-3" rows="1" required="">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 4" pattern="[0-9]*" value="" id="digit-4" rows="1" required="">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 5" pattern="[0-9]*" value="" id="digit-5" rows="1" required="">
+                                  <input type="text" maxlength="1" oninput="this.value=this.value.replace(/[^0-9]/g,'');" class="form-control form-control--codigo" aria-label="Digito 6" pattern="[0-9]*" value="" id="digit-6" rows="1" required="">
+                              </div>
+                              <small class="form-text text-muted">Introduzca el código de 6 dígitos enviado a su e-mail.</small>
+                          </div>
+                          <button type="submit" class="btn btn-primary btn-block">Verificar</button>
+                          <small class="form-text text-muted d-block"><a href="#">¿No ha recibido el código?</a></small>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </main>
+  </section>
+  <!-- MODALES -->
+</section>

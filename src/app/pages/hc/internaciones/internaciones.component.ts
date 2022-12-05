@@ -5,6 +5,7 @@ import { Base } from '../../../Models/BaseModel';
 import { Episodio, EpisodioInterface } from '../../../Models/Episodio';
 import { PersonasService } from '../../../services/personas.service';
 import { InternacionModalComponent } from './internacion-modal/internacion-modal.component';
+import {  EpicrisisClass } from '../../../Models/Epicrisis';
 
 @Component({
   selector: 'app-internaciones',
@@ -44,11 +45,14 @@ export class InternacionesComponent implements OnInit, OnDestroy{
   }
 
   openModal(episodio: EpisodioInterface){
+    let epis:EpicrisisClass[];
     this.personaSrv.obtenerEpicrisisPorIdEpisodio(episodio.Id)
       .subscribe((res)=>{
+        console.log(res);        
         if(res.Epicrisis){
+          epis = res.Epicrisis.map(x=> Object.assign(new EpicrisisClass(), x));
           const modalRef = this.modalService.open(InternacionModalComponent, {size: 'lg'});
-          modalRef.componentInstance.modal.Epicrisises = res.Epicrisis;
+          modalRef.componentInstance.Epicrisises = epis;
         }
       }
       );

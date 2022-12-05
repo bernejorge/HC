@@ -100,10 +100,14 @@ export class ResumenClinicoComponent implements OnInit, OnDestroy {
           console.log(res);
           this.episodios = res.Episodios.map(x => Object.assign(new Episodio(), x));
           if (this.episodios) {
-            this.episodios = this.episodios.slice(-10)
-              .sort((a, b) => {
-                return new Date(b.FechaIngreso).getTime() - new Date(a.FechaIngreso).getTime();
-              })
+            this.episodios = this.episodios
+            .filter(obj => {
+              return obj.MotivoInternacion !== ""
+            })            
+            .sort((a, b) => {
+              return new Date(b.FechaIngreso).getTime() - new Date(a.FechaIngreso).getTime();
+            }) //ordernados mas nuevos primeros
+            .slice(0,10); //solo 10 registros
               ; //obtener ultimos 10 registros, mas nuevos primeros
           }
         }

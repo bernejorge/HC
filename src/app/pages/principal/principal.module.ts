@@ -6,6 +6,7 @@ import { LoginModule } from '../login/login.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrarseModalComponent } from './registrarse-modal/registrarse-modal.component';
 
+
 const appRoutes: Routes = [
   {path: '', component: PrincipalComponent}
 

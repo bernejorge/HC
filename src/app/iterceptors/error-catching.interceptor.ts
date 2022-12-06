@@ -20,8 +20,14 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
         .catch((err: HttpErrorResponse) => { 
             console.log('Caught error', err);
             if(err.error){
-                let obj = JSON.parse(err.error.Message);
-                this.showAlert(obj.Message);
+                let m:string;
+                if(err.error.message){
+                    let obj = JSON.parse(err.error.Message);
+                    m = obj.Message;
+                }else if(err.error.Mensaje){
+                    m= err.error.Mensaje;
+                }
+                this.showAlert(m);
             }else{
                 this.showAlert('Ha ocurrido un error inesperado. Intente de nuevo mas tarde');
             }

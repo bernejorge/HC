@@ -41,10 +41,11 @@ getHttpHeaders(): HttpHeaders {
   }
   public registarse(tipoDocumento: string, documento: string, nacimiento: string): Observable<any> {
 
+    const urlReg="http://localhost:4200/validar-registro"
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
-    let body = 'Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}';
+    let body = `Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}&Url=${urlReg}`;
     return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, body, httpOptions);
    }
   private saveToken(token: string): void {

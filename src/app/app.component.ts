@@ -15,14 +15,14 @@ export class AppComponent {
   browserRefresh: boolean;
 
   constructor(private router: Router) {
-    this.subscription = this.router.events.subscribe((event) => {
-      if (event instanceof NavigationStart) {
-        this.browserRefresh = !this.router.navigated;
-        if(this.browserRefresh)
-        {
-          console.log(this.browserRefresh);
-        }
-      }
-  });
+  //   this.subscription = this.router.events.subscribe((event) => {
+  //     if (event instanceof NavigationStart) {
+  //       this.browserRefresh = !this.router.navigated;
+  //       if(this.browserRefresh)
+  //       {
+  //         console.log(this.browserRefresh);
+  //       }
+  //     }
+  // });
   }
 }

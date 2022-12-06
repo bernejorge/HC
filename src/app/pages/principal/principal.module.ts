@@ -7,8 +7,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { RegistrarseModalComponent } from './registrarse-modal/registrarse-modal.component';
 
 
-const appRoutes: Routes = [
-  {path: '', component: PrincipalComponent}
+const appRoutes: Routes = [  
+    {path: 'principal', component: PrincipalComponent}
+  
 
 ];
 @NgModule({

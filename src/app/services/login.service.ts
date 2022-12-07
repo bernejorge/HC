@@ -46,8 +46,32 @@ getHttpHeaders(): HttpHeaders {
       headers: this.getHttpHeaders(),
     };
     let body = `Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}&Url=${urlReg}`;
-    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, body, httpOptions);
+    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, body, httpOptions)
+      .pipe(
+        map((res:any)=>{
+            console.log(res);
+            if(res.Email){
+              localStorage.setItem('emailAValidar',res.Email);
+            } 
+          }
+        )
+      );
    }
+
+  public validarCodigo(codigo: number){
+    // /api/Sesion/ValidarCodigoTemporal
+    let mail = localStorage.getItem('emailAValidar');
+    if(mail==null){
+      mail="";
+    }
+
+    let httpOptions = {
+      headers: this.getHttpHeaders(),
+    };
+    let body = `Codigo=${codigo}&Email=${mail}`;
+    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarCodigoTemporal`, body, httpOptions);
+   }
+  
   private saveToken(token: string): void {
     localStorage.setItem('AccessToken', token);
     localStorage.setItem('LastVisit', new Date().getTime().toString());    
@@ -73,5 +97,7 @@ getHttpHeaders(): HttpHeaders {
       }      
     }else return false;
   }
+
+
 
 }

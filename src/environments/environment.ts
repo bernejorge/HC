@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi'
+  API_URL: 'http://innova.1704.dev.tipsalud.local/Asistencial/LogisticaDePaciente/IntegracionPortalApi',
+  URL_VALIDAR_REGISTRO : '"http://localhost:4200/validar-registro"'
 };

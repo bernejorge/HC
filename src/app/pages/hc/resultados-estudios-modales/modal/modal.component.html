@@ -7,7 +7,7 @@
   </button>
   <!-- <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button> -->
 </div>
-<div class="modal-body">
+<div class="modal-body" id="print-section">
   <div *ngIf="estudio !== undefined" class="row datosPersonales">
     <div class="col-md-6 col-xs-12 nombrePersona"><b>Nombre:</b>{{estudio.NombrePersona}}</div>
     <div class="col-md-3 col-xs-6"><b>Sexo:</b> {{estudio.Sexo}}</div>
@@ -20,15 +20,16 @@
   </div>
 
   <ng-container *ngIf="estudio?.Laboratorio?.length>0">
-    <app-estudios-lab [estudio]="estudio"></app-estudios-lab>
+    <app-estudios-lab  [estudio]="estudio"></app-estudios-lab>
   </ng-container>
 
   <ng-container *ngIf="estudio?.Imagen?.length>0" >
-    <app-estudios-imgen [estudio]="estudio" (miTitulo)="addTituloHijo($event)"></app-estudios-imgen>
+    <app-estudios-imgen  [estudio]="estudio" (miTitulo)="addTituloHijo($event)"></app-estudios-imgen>
   </ng-container>
 
 </div>
 <div class="modal-footer">
+  <button printSectionId="print-section" ngxPrint>print</button> 
   <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">
     Cerrar
   </button>

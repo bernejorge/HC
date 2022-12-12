@@ -22,12 +22,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SesionPermisosGuard } from './guards/sesion-permisos.guard';
 import { ValidarRegistroComponent } from './pages/validar-registro/validar-registro.component';
 
+
 import { ErrorCatchingInterceptor } from './iterceptors/error-catching.interceptor';
 import { LoginInicioComponent } from './pages/login-inicio/login-inicio.component';
 
 const appRoutes: Routes = [
-  { path: '', redirectTo : 'home2', pathMatch: "full" },
-  { path:'home2', component: LoginInicioComponent },
+  { path: '', redirectTo : 'home', pathMatch: "full" },
+  { path:'home', component: LoginInicioComponent },
   { path: 'login',  loadChildren:"./pages/login/login.module" },
   { path: 'validar-registro', component: ValidarRegistroComponent},
   { path: 'main', loadChildren: "./pages/hc/hc.module#HcModule", canActivate:[SesionPermisosGuard]}
@@ -52,7 +53,7 @@ const appRoutes: Routes = [
     CoreModule,
     SpinnerModule,
     NgbModule.forRoot(),   
-
+    
   ],
   exports: [SpinnerComponent],
   providers: [

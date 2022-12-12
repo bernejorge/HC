@@ -17,7 +17,7 @@ export class LoginService {
   }
 getHttpHeaders(): HttpHeaders {
   return  new HttpHeaders({
-      'Content-Type': 'application/x-www-form-urlencoded',
+      'Content-Type': 'application/json',
       'Accept': 'application/json'
     });   
   
@@ -27,7 +27,14 @@ getHttpHeaders(): HttpHeaders {
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
-    let body = `Usuario=${username}&Password=${password}&LoginUnico=true&IdTipoVinculo=2&ClientToken=333`;
+    //let body = `Usuario=${username}&Password=${password}&LoginUnico=true&IdTipoVinculo=2&ClientToken=333`;
+    let body ={
+      Usuario: username,
+      Password: password,
+      LoginUnico: true,
+      IdTipoVinculo: 2,
+      ClientToken: 333
+    }
     return this.http.post(`${environment.API_URL}/api/Sesion/Login`, body, httpOptions)
       .pipe(
         map((res: User) => {
@@ -40,13 +47,21 @@ getHttpHeaders(): HttpHeaders {
       );
   }
   public registarse(tipoDocumento: string, documento: string, nacimiento: string): Observable<any> {
-
+    const url ="";
     const urlReg="http://localhost:4200/validar-registro"
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
-    let body = `Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}&Url=${urlReg}`;
-    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, body, httpOptions)
+    //let body = `Documento=${documento}&TipoDocumento=${tipoDocumento}&FechaNacimiento=${nacimiento}&Url=${urlReg}`;
+    let body = {
+      "Documento": documento,
+      "TipoDocumento": 1,
+      "FechaNacimiento": nacimiento,
+      "Url":urlReg,
+    };
+    let bodystr = JSON.stringify(body);
+
+    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, bodystr, httpOptions)
       .pipe(
         map((res:any)=>{
             console.log(res);

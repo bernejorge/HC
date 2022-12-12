@@ -15,7 +15,7 @@ export class ValidarRegistroComponent implements OnInit {
   constructor(private loginSrv: LoginService, private fb: FormBuilder) { 
     this.cForm = this.fb.group(
       {
-        digito1: ['2', Validators.compose([Validators.required, Validators.maxLength(1)])],
+        digito1: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
         digito2: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
         digito3: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
         digito4: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],

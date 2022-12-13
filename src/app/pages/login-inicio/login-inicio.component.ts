@@ -70,8 +70,10 @@ export class LoginInicioComponent implements OnInit {
 				//respuesta de exito
 				console.log(x);
 				//mostrar mensaje de exito, mostrar modal
-				this.modalRegRef = this.modalService.open(RegistroExitosoComponent)
-				this.modalRegRef.result.then((result) => {
+				const mail = this.obscure_email( x.Email);
+				const modalRef = this.modalService.open(RegistroExitosoComponent)
+				modalRef.componentInstance.email = mail;
+				modalRef.result.then((result) => {
 					this.router.navigate(['/validar-registro']);
 
 				}, (reason) => {

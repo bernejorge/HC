@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
+import { RegistrarseComponent } from './modales/registrarse/registrarse.component';
+import { RegistroExitosoComponent } from './modales/registro-exitoso/registro-exitoso.component';
 
 @Component({
 	selector: 'app-login-inicio',
@@ -12,14 +14,13 @@ import Swal from 'sweetalert2';
 })
 export class LoginInicioComponent implements OnInit {
 
-	@ViewChild('succesReg') modalReg:any;
+	@ViewChild('content2') modalReg: any;
+	@ViewChild('content') modal: any;
+	modalRegRef: any;
 	loginForm: FormGroup;
-	resgistrationForm = this.fb.group({
-		docnumber: [''],
-		nac: [''],
-	});
+	string = "";
 	aceptaTerminos = false;
-	constructor(private fb: FormBuilder, private modalService: NgbModal, private loginSrv: LoginService, private router: Router) { 
+	constructor(private fb: FormBuilder, private modalService: NgbModal, private loginSrv: LoginService, private router: Router) {
 		this.loginForm = this.fb.group({
 			username: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
 			password: [''],
@@ -27,7 +28,7 @@ export class LoginInicioComponent implements OnInit {
 	}
 
 	ngOnInit() {
-		
+
 	}
 	ingresar() {
 		//definicion del observador
@@ -50,27 +51,64 @@ export class LoginInicioComponent implements OnInit {
 		//this.mymodalIsOpen=false;
 	}
 
-	openModalRegistrarse(){
-		
+	openModal() {
+		this.modalRegRef = this.modalService.open(RegistrarseComponent);
+		this.modalRegRef.result.then((result) => {
+			if (result) {
+				
+				const doc = result.controls.docnumber.value;
+				const nac = new Date(result.controls.nac.value);
+				this.regitrarse(doc, nac);
+			}
+		});
 	}
-	regitrarse() {
+
+	regitrarse(doc: string, nac: Date) {
 		//definicion del observador
 		const RegistrarseObserver = {
 			next: (x) => {
 				//respuesta de exito
 				console.log(x);
-				//mostrar mensaje de exito
-				this.router.navigate(['/validar-registro']);
+				//mostrar mensaje de exito, mostrar modal
+				this.modalRegRef = this.modalService.open(RegistroExitosoComponent)
+				this.modalRegRef.result.then((result) => {
+					this.router.navigate(['/validar-registro']);
+
+				}, (reason) => {
+					console.log(reason);
+					this.router.navigate(['/validar-registro']);
+				});
+
+				;
 			},
 
 		}
-		const doc = this.resgistrationForm.controls.docnumber.value;
-		const nac = new Date(this.resgistrationForm.controls.nac.value);
+
 		this.loginSrv.registarse("1", doc, nac.toISOString())
 			.subscribe(RegistrarseObserver);
 	}
 
-	isValidEmail():boolean  {
+	isValidEmail(): boolean {
 		return this.loginForm.controls['username'].valid && this.loginForm.controls['username'].touched;
+	}
+
+	obscure_email(email) {
+		var parts = email.split("@");
+		var name = parts[0];
+		var result = name.charAt(0);
+		for (var i = 1; i < name.length; i++) {
+			result += "*";
+		}
+		result += name.charAt(name.length - 1);
+		result += "@";
+		var domain = parts[1];
+		result += domain.charAt(0);
+		var dot = domain.indexOf(".");
+		for (var i = 1; i < dot; i++) {
+			result += "*";
+		}
+		result += domain.substring(dot);
+
+		return result;
 	}
 }

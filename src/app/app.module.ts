@@ -26,6 +26,9 @@ import { ValidarRegistroComponent } from './pages/validar-registro/validar-regis
 import { ErrorCatchingInterceptor } from './iterceptors/error-catching.interceptor';
 import { LoginInicioComponent } from './pages/login-inicio/login-inicio.component';
 
+import { RegistroExitosoComponent } from './pages/login-inicio/modales/registro-exitoso/registro-exitoso.component';
+import { RegistrarseComponent } from './pages/login-inicio/modales/registrarse/registrarse.component';
+
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
   { path:'home', component: LoginInicioComponent },
@@ -39,8 +42,11 @@ const appRoutes: Routes = [
     AppComponent,
     ValidarRegistroComponent,
     LoginInicioComponent,
+    RegistrarseComponent,
+    RegistroExitosoComponent,
     
   ],
+  entryComponents:[ RegistrarseComponent, RegistroExitosoComponent,],
   imports: [ 
     RouterModule.forRoot(appRoutes),
     BrowserModule,

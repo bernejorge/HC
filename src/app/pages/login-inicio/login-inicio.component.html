@@ -53,62 +53,17 @@
                   <div class="registro">
                       <h1>Bienvenido a</h1>
                       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Praesentium inventore, maiores nulla corrupti incidunt dicta veritatis aliquid nobis natus quae illo quaerat excepturi labore repellat laudantium, ipsam voluptatibus doloremque earum?</p>
-                      <button class="btn btn-outline-light btn-lg" data-toggle="modal" data-target="#registro">Registrarse</button>
+                      <!-- <button class="btn btn-outline-light btn-lg" data-toggle="modal" data-target="#registro">Registrarse</button> -->
+                      <button class="btn btn-outline-light btn-lg" (click)="openModal()">Registrarse</button>
                   </div>
               </div>
           </div>
       </main>
   </section>
   <!-- MODALES -->
-  <!-- Modal de registro -->
-  <div class="modal HCOnline" tabindex="-1" id="registro">
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title">Registrarse</h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <p>Si usted es paciente de nuestra institución, es necesario generar su usuario con la dirección de correo electrónico con la que está empadronado.</p>
-                  <p>Si no lo recuerda, llame al <strong>030345666.</strong></p>
-                  <form [formGroup]="resgistrationForm">
-                      <div class="row">
-                          <div class="col">
-                              <label for="">Nº de documento</label>
-                              <input type="number" class="form-control" placeholder="" formControlName="docnumber">
-                          </div>
-                          <div class="col">
-                              <label for="">Fecha de nacimiento</label>
-                              <input type="date" class="form-control" placeholder="" formControlName="nac">
-                          </div>
-                      </div>
-                      <button type="button" class="btn btn-primary btn-block mt-3" (click)="regitrarse()">Registrar</button>
-                  </form>
-              </div>
-          </div>
-      </div>
-  </div>
-  <!-- Modal de registro exitoso -->
-  <div class="modal HCOnline" tabindex="-1" id="registroExito" #succesReg>
-      <div class="modal-dialog">
-          <div class="modal-content">
-              <div class="modal-header">
-                  <h5 class="modal-title"><i class="fa fa--exito fa-2x fa-check-circle pr-2"></i><span>Gracias por registrarse</span></h5>
-                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">×</span>
-                  </button>
-              </div>
-              <div class="modal-body">
-                  <p>Enviaremos un código de verificación a su correo electrónico po*****@g***.com para confirmar su dirección.</p>
-                  <p>Haga clic en “Aceptar” para completar el proceso.</p>
-                  <button type="button" class="btn btn-primary btn-block mt-3" data-toggle="modal" data-target="#registroError">Aceptar</button>
-                  <small class="form-text text-muted d-block"><a href="#">¿No reconoce ese email?</a></small>
-              </div>
-          </div>
-      </div>
-  </div>
+
+  
+
   <!-- Modal de error por no ser cliente -->
   <div class="modal HCOnline" id="registroError">
       <div class="modal-dialog">

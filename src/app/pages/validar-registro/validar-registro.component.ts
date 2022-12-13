@@ -20,7 +20,7 @@ export class ValidarRegistroComponent implements OnInit {
         digito3: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
         digito4: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
         digito5: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
-        digito6: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
+        // digito6: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
       }
     );
   }

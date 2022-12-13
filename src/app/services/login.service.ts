@@ -68,6 +68,7 @@ getHttpHeaders(): HttpHeaders {
             if(res.Email){
               localStorage.setItem('emailAValidar',res.Email);
             } 
+            return res;
           }
         )
       );
@@ -83,7 +84,11 @@ getHttpHeaders(): HttpHeaders {
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
-    let body = `Codigo=${codigo}&Email=${mail}`;
+    //let body = `Codigo=${codigo}&Email=${mail}`;
+    let body = {
+      Codigo: codigo,
+      Email: mail, 
+    }
     return this.http.post(`${environment.API_URL}/api/Sesion/ValidarCodigoTemporal`, body, httpOptions);
    }
   

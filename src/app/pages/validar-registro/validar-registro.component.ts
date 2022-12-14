@@ -39,10 +39,14 @@ export class ValidarRegistroComponent implements OnInit {
         }
         const codigo = Number(stringCode);
         this.loginSrv.validarCodigo(codigo).subscribe(
-          (res)=>{
+          (res:any)=>{
             //codigo respuesta exitosa
             console.log(res);
-            this.showAlert();
+            if (res.TienePerfil ){
+              this.msgValidacionExitoConPerfil();            
+            }else{
+              this.msgValidacionExito();
+            }
             //this.router.navigate(['/generar-password']);
           }
         );
@@ -56,15 +60,24 @@ export class ValidarRegistroComponent implements OnInit {
 
     return true;
   }
-  showAlert() {
-    Swal({
+  msgValidacionExito() {
+   Swal({
      title: 'Valdacion Exitosa',
      text: 'Ha realizado la validación de manera correcta.',
      type: 'success',
     }).then((result) => {
-      // redirectTo Login
+      // redirectTo generar-password
       this.router.navigate(['/generar-password']);
     })
   }
-
+  msgValidacionExitoConPerfil() {
+    Swal({
+      title: 'Valdacion Exitosa',
+      text: 'Ha realizado la validación de manera correcta. Utilice el usuario y contraseña que usa habitualmente en Turnos Online.',
+      type: 'success',
+     }).then((result) => {
+       // redirectTo Login
+       this.router.navigate(['/home']);
+     })
+   }
 }

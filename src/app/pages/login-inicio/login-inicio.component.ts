@@ -55,12 +55,15 @@ export class LoginInicioComponent implements OnInit {
 		this.modalRegRef = this.modalService.open(RegistrarseComponent);
 		this.modalRegRef.result.then((result) => {
 			if (result) {
-				
+
 				const doc = result.controls.docnumber.value;
 				const nac = new Date(result.controls.nac.value);
 				this.regitrarse(doc, nac);
 			}
-		});
+		}, (reason)=>{
+			console.log(reason);
+		}
+		);
 	}
 
 	regitrarse(doc: string, nac: Date) {
@@ -70,9 +73,9 @@ export class LoginInicioComponent implements OnInit {
 				//respuesta de exito
 				console.log(x);
 				//mostrar mensaje de exito, mostrar modal
-				const mail = this.obscure_email( x.Email);
+				const mail = this.obscure_email(x.Email);
 				const modalRef = this.modalService.open(RegistroExitosoComponent)
-				modalRef.componentInstance.email = mail;
+				modalRef.componentInstance.email = mail.toLowerCase();
 				modalRef.result.then((result) => {
 					this.router.navigate(['/validar-registro']);
 

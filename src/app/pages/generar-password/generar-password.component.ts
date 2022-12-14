@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '../../custom-validators';
 import Swal from 'sweetalert2';
@@ -12,6 +12,7 @@ import { LoginService } from '../../services/login.service';
 })
 export class GenerarPasswordComponent implements OnInit {
 
+  
   passForm: FormGroup;
   constructor(private fb:FormBuilder,  private router: Router, private loginSrv: LoginService) { }
 

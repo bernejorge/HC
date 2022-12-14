@@ -89,11 +89,22 @@ export class LoginService {
       Codigo: codigo,
       Email: mail,
     }
-    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarCodigoTemporal`, body, httpOptions);
+    return this.http.post(`${environment.API_URL}/api/Sesion/ValidarCodigoTemporal`, body, httpOptions)
+      .pipe(
+        map((res:any) =>{
+          if(res.IdExterno){
+            sessionStorage.setItem('idExterno', res.IdExterno );
+          }
+          return res;
+        })
+
+      );
   }
-  public registrarPrefilConVinculo(pass : string) {
+
+  public registrarPrefilConVinculo(pass: string,) {
     ///api/Sesion/RegistrarPerfilConVinculo
     let mail = localStorage.getItem('emailAValidar');
+    const idExt = sessionStorage.getItem('idExterno');
     if (mail == null) {
       mail = "";
     }
@@ -106,7 +117,7 @@ export class LoginService {
       "NombreUsuario": mail,
       "PasswordUsuario": pass,
       "EmailUsuario": mail,
-      "IdExterno": 0
+      "IdExterno": idExt,
     }
     return this.http.post(`${environment.API_URL}/api/Sesion/RegistrarPerfilConVinculo`, body, httpOptions);
   }

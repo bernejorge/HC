@@ -20,6 +20,7 @@ export class RegistrarseComponent implements OnInit {
     });
   }
   regitrarse(){
+    //devuelvo el form con los datos al componente padre
     this.passEntry.emit(this.resgistrationForm);
     this.activeModal.close(this.resgistrationForm);
   }

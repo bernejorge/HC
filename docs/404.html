@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><title>HCE Online</title><base href="/HC/"/><meta name="viewport" content="width=device-width,initial-scale=1"/><link rel="shortcut icon" href="./assets/client/ReinaFabiola/favicon.png" type="image/x-icon"><link rel="icon" href="./assets/client/ReinaFabiola/favicon.png" type="image/x-icon"><link rel="preconnect" href="https://fonts.gstatic.com"><link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,200;0,300;0,400;0,600;0,700;1,400&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"><link rel="stylesheet" href="./assets/css/vendor.css"><link rel="stylesheet" id="theme-style" href="./assets/css/app.css"></head><body id="mainHCE"><app-root></app-root><script type="application/javascript" src="./assets/js/vendor.js"></script><!-- <script type="application/javascript" src="./assets/js/app.js"></script> --><!-- Tooltip --><script type="text/javascript">$(function()
+      {
+          $('[data-toggle="tooltip"]').tooltip();
+          $('[data-toggle="popover"]').popover(
+          {
+              html: true
+          })
+      });
+      // Dismiss popover click outside ///////////////////////////////////////
+      $('body').on('click', function(e)
+      {
+          $('[data-toggle=popover]').each(function()
+          {
+              // hide any open popovers when the anywhere else in the body is clicked
+              if (!$(this).is(e.target) && $(this).has(e.target).length === 0 && $('.popover').has(e.target).length === 0)
+              {
+                  $(this).popover('hide');
+              }
+          });
+      });
+      ////////////////////////////////////////////////////////////////////////
+      $('#myModal').on('shown.bs.modal', function()
+      {
+          $('#myInput').focus()
+      });</script><script type="text/javascript" src="inline.0dffc2bc9f8644661420.bundle.js"></script><script type="text/javascript" src="polyfills.9007f99a3d5296947c65.bundle.js"></script><script type="text/javascript" src="vendor.2161fd0f6d55803d54f4.bundle.js"></script><script type="text/javascript" src="main.7bbe7ebd05f812f21a3a.bundle.js"></script></body></html>

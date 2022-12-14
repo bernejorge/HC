@@ -28,12 +28,15 @@ import { LoginInicioComponent } from './pages/login-inicio/login-inicio.componen
 
 import { RegistroExitosoComponent } from './pages/login-inicio/modales/registro-exitoso/registro-exitoso.component';
 import { RegistrarseComponent } from './pages/login-inicio/modales/registrarse/registrarse.component';
+import { RecuperarClaveComponent } from './pages/login-inicio/modales/recuperar-clave/recuperar-clave.component';
+import { GenerarPasswordComponent } from './pages/generar-password/generar-password.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
   { path:'home', component: LoginInicioComponent },
   { path: 'login',  loadChildren:"./pages/login/login.module" },
   { path: 'validar-registro', component: ValidarRegistroComponent},
+  {path: 'generar-password', component: GenerarPasswordComponent},
   { path: 'main', loadChildren: "./pages/hc/hc.module#HcModule", canActivate:[SesionPermisosGuard]}
 ];
 
@@ -44,6 +47,8 @@ const appRoutes: Routes = [
     LoginInicioComponent,
     RegistrarseComponent,
     RegistroExitosoComponent,
+    RecuperarClaveComponent,
+    GenerarPasswordComponent,
     
   ],
   entryComponents:[ RegistrarseComponent, RegistroExitosoComponent,],

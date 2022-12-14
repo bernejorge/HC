@@ -12,23 +12,23 @@ export class LoginService {
 
   constructor(private http: HttpClient) { }
 
-  prueba(){
+  prueba() {
     window.alert("hola");
   }
-getHttpHeaders(): HttpHeaders {
-  return  new HttpHeaders({
+  getHttpHeaders(): HttpHeaders {
+    return new HttpHeaders({
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-    });   
-  
-   
-}
-  login(username: string, password: string ): Observable<any> {
+    });
+
+
+  }
+  login(username: string, password: string): Observable<any> {
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
     //let body = `Usuario=${username}&Password=${password}&LoginUnico=true&IdTipoVinculo=2&ClientToken=333`;
-    let body ={
+    let body = {
       Usuario: username,
       Password: password,
       LoginUnico: true,
@@ -47,8 +47,8 @@ getHttpHeaders(): HttpHeaders {
       );
   }
   public registarse(tipoDocumento: string, documento: string, nacimiento: string): Observable<any> {
-    const url ="";
-    const urlReg="http://localhost:4200/validar-registro"
+    const url = "";
+    const urlReg = "http://localhost:4200/validar-registro"
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };
@@ -57,28 +57,28 @@ getHttpHeaders(): HttpHeaders {
       "Documento": documento,
       "TipoDocumento": 1,
       "FechaNacimiento": nacimiento,
-      "Url":urlReg,
+      "Url": urlReg,
     };
     let bodystr = JSON.stringify(body);
 
     return this.http.post(`${environment.API_URL}/api/Sesion/ValidarAlta`, bodystr, httpOptions)
       .pipe(
-        map((res:any)=>{
-            console.log(res);
-            if(res.Email){
-              localStorage.setItem('emailAValidar',res.Email);
-            } 
-            return res;
+        map((res: any) => {
+          console.log(res);
+          if (res.Email) {
+            localStorage.setItem('emailAValidar', res.Email);
           }
+          return res;
+        }
         )
       );
-   }
+  }
 
-  public validarCodigo(codigo: number){
+  public validarCodigo(codigo: number) {
     // /api/Sesion/ValidarCodigoTemporal
     let mail = localStorage.getItem('emailAValidar');
-    if(mail==null){
-      mail="";
+    if (mail == null) {
+      mail = "";
     }
 
     let httpOptions = {
@@ -87,14 +87,32 @@ getHttpHeaders(): HttpHeaders {
     //let body = `Codigo=${codigo}&Email=${mail}`;
     let body = {
       Codigo: codigo,
-      Email: mail, 
+      Email: mail,
     }
     return this.http.post(`${environment.API_URL}/api/Sesion/ValidarCodigoTemporal`, body, httpOptions);
-   }
-  
+  }
+  public registrarPrefilConVinculo(pass : string) {
+    ///api/Sesion/RegistrarPerfilConVinculo
+    let mail = localStorage.getItem('emailAValidar');
+    if (mail == null) {
+      mail = "";
+    }
+
+    let httpOptions = {
+      headers: this.getHttpHeaders(),
+    };
+    //let body = `Codigo=${codigo}&Email=${mail}`;
+    let body = {
+      "NombreUsuario": mail,
+      "PasswordUsuario": pass,
+      "EmailUsuario": mail,
+      "IdExterno": 0
+    }
+    return this.http.post(`${environment.API_URL}/api/Sesion/RegistrarPerfilConVinculo`, body, httpOptions);
+  }
   private saveToken(token: string): void {
     localStorage.setItem('AccessToken', token);
-    localStorage.setItem('LastVisit', new Date().getTime().toString());    
+    localStorage.setItem('LastVisit', new Date().getTime().toString());
   }
   public getToken(): string | null {
     return localStorage.getItem('AccessToken');
@@ -105,18 +123,20 @@ getHttpHeaders(): HttpHeaders {
     localStorage.removeItem('LastVisit');
     //Todo: llamar al metodo logout del backend
   }
-  public isLoggedIn():boolean {
+  public isLoggedIn(): boolean {
     let lastV = localStorage.getItem('LastVisit');
-    if (this.getToken() && lastV){
+    if (this.getToken() && lastV) {
       try {
-        const dateDiff = new Date().getTime() - Number(lastV); 
-        const tolerenciaMinutos =  10 * 1000 * 60; // 10 minutes
+        const dateDiff = new Date().getTime() - Number(lastV);
+        const tolerenciaMinutos = 10 * 1000 * 60; // 10 minutes
         return dateDiff < tolerenciaMinutos;
       } catch (error) {
         return false
-      }      
-    }else return false;
+      }
+    } else return false;
   }
+
+
 
 
 

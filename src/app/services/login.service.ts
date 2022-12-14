@@ -47,8 +47,8 @@ export class LoginService {
       );
   }
   public registarse(tipoDocumento: string, documento: string, nacimiento: string): Observable<any> {
-    const url = "";
-    const urlReg = "http://localhost:4200/validar-registro"
+    const url = window.location.origin;
+    const urlReg = url + "/validar-registro"
     let httpOptions = {
       headers: this.getHttpHeaders(),
     };

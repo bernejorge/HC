@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CustomValidators } from '../../custom-validators';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+import { LoginService } from '../../services/login.service';
 
 @Component({
   selector: 'app-generar-password',
@@ -12,7 +13,7 @@ import { Router } from '@angular/router';
 export class GenerarPasswordComponent implements OnInit {
 
   passForm: FormGroup;
-  constructor(private fb:FormBuilder,  private router: Router) { }
+  constructor(private fb:FormBuilder,  private router: Router, private loginSrv: LoginService) { }
 
   ngOnInit() {
     this.passForm = this.fb.group({
@@ -59,6 +60,7 @@ export class GenerarPasswordComponent implements OnInit {
 
       }
     }
+    this.loginSrv.registrarPrefilConVinculo(password).subscribe(observador);
 
   }
 

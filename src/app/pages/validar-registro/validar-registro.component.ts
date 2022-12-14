@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginService } from '../../services/login.service';
-
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-validar-registro',
   templateUrl: './validar-registro.component.html',
@@ -12,7 +13,7 @@ export class ValidarRegistroComponent implements OnInit {
   cForm: FormGroup;
   
 
-  constructor(private loginSrv: LoginService, private fb: FormBuilder) { 
+  constructor(private loginSrv: LoginService, private fb: FormBuilder, private router: Router) { 
     this.cForm = this.fb.group(
       {
         digito1: ['', Validators.compose([Validators.required, Validators.maxLength(1)])],
@@ -41,6 +42,8 @@ export class ValidarRegistroComponent implements OnInit {
           (res)=>{
             //codigo respuesta exitosa
             console.log(res);
+            this.showAlert();
+            //this.router.navigate(['/generar-password']);
           }
         );
       }else{  
@@ -52,6 +55,16 @@ export class ValidarRegistroComponent implements OnInit {
   validarInputs():boolean{
 
     return true;
+  }
+  showAlert() {
+    Swal({
+     title: 'Valdacion Exitosa',
+     text: 'Ha realizado la validación de manera correcta.',
+     type: 'success',
+    }).then((result) => {
+      // redirectTo Login
+      this.router.navigate(['/generar-password']);
+    })
   }
 
 }

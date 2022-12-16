@@ -6,6 +6,7 @@ import { LoginService } from '../../services/login.service';
 import Swal from 'sweetalert2';
 import { RegistrarseComponent } from './modales/registrarse/registrarse.component';
 import { RegistroExitosoComponent } from './modales/registro-exitoso/registro-exitoso.component';
+import { TerminosCondicionesComponent } from './modales/terminos-condiciones/terminos-condiciones.component';
 
 @Component({
 	selector: 'app-login-inicio',
@@ -66,6 +67,10 @@ export class LoginInicioComponent implements OnInit {
 		);
 	}
 
+	mostrarTerminos(){
+		const modalRef = this.modalService.open(TerminosCondicionesComponent, { size: 'lg' });
+
+	}
 	regitrarse(doc: string, nac: Date) {
 		//definicion del observador
 		const RegistrarseObserver = {

@@ -35,7 +35,7 @@
                                 <input type="checkbox" [checked]="aceptaTerminos"
                                     (change)="aceptaTerminos = !aceptaTerminos" class="form-check-input" id="acepto"
                                     required="" />
-                                <label class="form-check-label" for="acepto">Acepto los <a href="#">términos y
+                                <label class="form-check-label" for="acepto">Acepto los <a (click)="mostrarTerminos()">términos y
                                         condiciones</a></label>
                             </div>
                             <!-- El button sera 'disabled' hasta que el usuario acepte los términos y condiciones -->

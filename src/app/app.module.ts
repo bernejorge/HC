@@ -30,6 +30,7 @@ import { RegistroExitosoComponent } from './pages/login-inicio/modales/registro-
 import { RegistrarseComponent } from './pages/login-inicio/modales/registrarse/registrarse.component';
 import { RecuperarClaveComponent } from './pages/login-inicio/modales/recuperar-clave/recuperar-clave.component';
 import { GenerarPasswordComponent } from './pages/generar-password/generar-password.component';
+import { TerminosCondicionesComponent } from './pages/login-inicio/modales/terminos-condiciones/terminos-condiciones.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
@@ -49,9 +50,10 @@ const appRoutes: Routes = [
     RegistroExitosoComponent,
     RecuperarClaveComponent,
     GenerarPasswordComponent,
+    TerminosCondicionesComponent,
     
   ],
-  entryComponents:[ RegistrarseComponent, RegistroExitosoComponent,],
+  entryComponents:[ RegistrarseComponent, RegistroExitosoComponent, TerminosCondicionesComponent],
   imports: [ 
     RouterModule.forRoot(appRoutes),
     BrowserModule,

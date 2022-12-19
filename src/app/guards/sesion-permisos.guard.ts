@@ -31,7 +31,7 @@ export class SesionPermisosGuard implements CanActivate, CanActivateChild  {
     const result = this.LoginSrv.isLoggedIn()
     
     if(!result){
-      alert("Su sesion a expirado");
+      alert("Su sesión a expirado");
       this.router.navigate(['/']);
     }      
 

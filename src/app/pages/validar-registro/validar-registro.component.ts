@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 export class ValidarRegistroComponent implements OnInit {
 
   cForm: FormGroup;
-  
+
 
   constructor(private loginSrv: LoginService, private fb: FormBuilder, private router: Router) { 
     this.cForm = this.fb.group(

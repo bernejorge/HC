@@ -57,8 +57,9 @@
                         </p>
                         <!-- <button class="btn btn-outline-light btn-lg" data-toggle="modal" data-target="#registro">Registrarse</button> -->
                         <button class="btn btn-outline-light btn-lg" (click)="openModal()">
-                            Registrarse
+                            {{btnText}}
                         </button>
+                        <p *ngIf="!registrase" (click)="resetearRegistro()" >¿No ha recibido el código?</p>
                     </div>
                 </div>
             </div>

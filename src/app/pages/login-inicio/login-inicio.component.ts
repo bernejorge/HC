@@ -21,13 +21,27 @@ export class LoginInicioComponent implements OnInit {
 	loginForm: FormGroup;
 	string = "";
 	aceptaTerminos = false;
+	registrase:boolean = true;
+	btnText:string = "Registrarse"
+	
 	constructor(private fb: FormBuilder, private modalService: NgbModal, private loginSrv: LoginService, private router: Router) {
 		this.loginForm = this.fb.group({
 			username: ['', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$')]],
 			password: [''],
 		});
+		//saber que texto mostrar en el btn de registro y que modal disparar
+		this.setRegistro();
 	}
-
+	setRegistro() {
+		const mail = localStorage.getItem("emailAValidar");
+		if (mail == null || mail.length == 0) {
+			this.registrase = true;
+			this.btnText = "Registrarse";
+		}else{
+			this.registrase = false;
+			this.btnText = "Validar Codigo Temporal";
+		}
+	}
 	ngOnInit() {
 
 	}
@@ -53,18 +67,24 @@ export class LoginInicioComponent implements OnInit {
 	}
 
 	openModal() {
-		this.modalRegRef = this.modalService.open(RegistrarseComponent);
-		this.modalRegRef.result.then((result) => {
-			if (result) {
-
-				const doc = result.controls.docnumber.value;
-				const nac = new Date(result.controls.nac.value);
-				this.regitrarse(doc, nac);
+		if(this.registrase){
+			this.modalRegRef = this.modalService.open(RegistrarseComponent);
+			this.modalRegRef.result.then((result) => {
+				if (result) {
+	
+					const doc = result.controls.docnumber.value;
+					const nac = new Date(result.controls.nac.value);
+					this.regitrarse(doc, nac);
+				}
+			}, (reason)=>{
+				console.log(reason);
+				this.setRegistro();
 			}
-		}, (reason)=>{
-			console.log(reason);
+			);
+		}else{
+			this.router.navigate(['/validar-registro']);
 		}
-		);
+		
 	}
 
 	mostrarTerminos(){
@@ -97,7 +117,11 @@ export class LoginInicioComponent implements OnInit {
 		this.loginSrv.registarse("1", doc, nac.toISOString())
 			.subscribe(RegistrarseObserver);
 	}
-
+	resetearRegistro(){
+		this.registrase = true;
+		
+		this.openModal();
+	}
 	isValidEmail(): boolean {
 		return this.loginForm.controls['username'].valid && this.loginForm.controls['username'].touched;
 	}

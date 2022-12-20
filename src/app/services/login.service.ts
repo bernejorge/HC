@@ -67,6 +67,7 @@ export class LoginService {
           console.log(res);
           if (res.Email) {
             localStorage.setItem('emailAValidar', res.Email);
+            localStorage.setItem('UltimoRegistro', new Date().getTime().toString());
           }
           return res;
         }

@@ -28,7 +28,7 @@
                           </div>
                           <input type="submit" class="btn btn-primary btn-block" [disabled]="!cForm.valid" value="Verificar" >
                           <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="!cForm.valid">Verificar</button> -->
-                          <small class="form-text text-muted d-block"><a href="#">¿No ha recibido el código?</a></small>
+                          <small class="form-text text-muted d-block"><a (click)="openModal()" >¿No ha recibido el código?</a></small>
                       </form>
                   </div>
               </div>

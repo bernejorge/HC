@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 import { RegistrarseComponent } from './modales/registrarse/registrarse.component';
 import { RegistroExitosoComponent } from './modales/registro-exitoso/registro-exitoso.component';
 import { TerminosCondicionesComponent } from './modales/terminos-condiciones/terminos-condiciones.component';
+import swal from 'sweetalert2';
 
 @Component({
 	selector: 'app-login-inicio',
@@ -45,25 +46,40 @@ export class LoginInicioComponent implements OnInit {
 	ngOnInit() {
 
 	}
+	validar():boolean{
+		if(!this.aceptaTerminos){
+			Swal({
+				title: 'Importante.',
+				text: "Debe aceptar los Terminos y Condiciones para poder ingresar.",
+				type: 'info'
+			   })
+			   return false;
+		}
+
+		return true;
+	}
 	ingresar() {
 		//definicion del observador
-		const LoginObserver = {
-			next: (x) => {
-				console.log(x);
-				//this.activeModal.close();
-				this.router.navigate(['/main']);
-			},
-			// error: (x) => {
-			// 	console.error(x);
-			// 	window.alert("Error: " + x.message);
-			// }
+		if(this.validar()){
 
+			const LoginObserver = {
+				next: (x) => {
+					console.log(x);
+					//this.activeModal.close();
+					this.router.navigate(['/main']);
+				},
+				// error: (x) => {
+				// 	console.error(x);
+				// 	window.alert("Error: " + x.message);
+				// }
+	
+			}
+			console.log(this.loginForm.controls.username.value);
+			this.loginSrv.login(this.loginForm.controls.username.value,
+				this.loginForm.controls.password.value)
+				.subscribe(LoginObserver);
+			//this.mymodalIsOpen=false;
 		}
-		console.log(this.loginForm.controls.username.value);
-		this.loginSrv.login(this.loginForm.controls.username.value,
-			this.loginForm.controls.password.value)
-			.subscribe(LoginObserver);
-		//this.mymodalIsOpen=false;
 	}
 
 	openModal() {

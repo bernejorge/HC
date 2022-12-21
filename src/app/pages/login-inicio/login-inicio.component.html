@@ -16,11 +16,11 @@
                             <div class="form-group">
                                 <label for="login">Correo electrónico</label>
                                 <input type="email" formControlName="username" class="form-control"
-                                    [ngClass]="!isValidEmail() ? 'is-invalid' : ''" id="mail"
+                                    [ngClass]="!loginForm.controls['username'].valid && loginForm.controls['username']?.dirty ? 'is-invalid' : ''" id="mail"
                                     aria-describedby="emailHelp" required="" />
                                 <small class="form-text a-text"><a href="#" data-toggle="modal"
                                         data-target="#correo">¿Olvidó su correo electrónico?</a></small>
-                                <div *ngIf="!isValidEmail()" class="invalid-feedback">
+                               <div *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username']?.dirty" class="invalid-feedback">
                                     <div>Debe ingresar un Email válido.</div>
                                 </div>
                             </div>

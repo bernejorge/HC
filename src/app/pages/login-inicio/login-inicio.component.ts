@@ -123,6 +123,8 @@ export class LoginInicioComponent implements OnInit {
 		this.openModal();
 	}
 	isValidEmail(): boolean {
+		
+		
 		return this.loginForm.controls['username'].valid && this.loginForm.controls['username'].touched;
 	}
 

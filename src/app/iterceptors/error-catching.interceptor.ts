@@ -37,7 +37,7 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
     }
 
     showAlert(m : string) {
-        if(!m){
+        if(m==null || m.length==0){
             m= "Ha ocurrido un error inesperado. Intente nuevamente mas tarde.";
         }
        Swal({

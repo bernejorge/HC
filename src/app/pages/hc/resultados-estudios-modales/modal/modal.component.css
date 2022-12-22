@@ -7,8 +7,11 @@
 }
 
 @media print {
+    body * {
+        display:none !important;
+      }
     #noprint{
-        
+        display:none !important;
     }
     .modal,
     .modal * {
@@ -37,5 +40,11 @@
     }
     #lab{
         overflow: visible !important;
+    }
+    button{
+        display:none !important;
+    }
+    .mainHCESidebarList__container{
+        display:none !important;
     }
 }

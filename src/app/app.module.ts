@@ -31,6 +31,7 @@ import { RegistrarseComponent } from './pages/login-inicio/modales/registrarse/r
 import { RecuperarClaveComponent } from './pages/login-inicio/modales/recuperar-clave/recuperar-clave.component';
 import { GenerarPasswordComponent } from './pages/generar-password/generar-password.component';
 import { TerminosCondicionesComponent } from './pages/login-inicio/modales/terminos-condiciones/terminos-condiciones.component';
+import { OlvidoSuPassComponent } from './pages/login-inicio/modales/olvido-su-pass/olvido-su-pass.component';
 
 const appRoutes: Routes = [
   { path: '', redirectTo : 'home', pathMatch: "full" },
@@ -51,9 +52,10 @@ const appRoutes: Routes = [
     RecuperarClaveComponent,
     GenerarPasswordComponent,
     TerminosCondicionesComponent,
+    OlvidoSuPassComponent,
     
   ],
-  entryComponents:[ RegistrarseComponent, RegistroExitosoComponent, TerminosCondicionesComponent],
+  entryComponents:[ RegistrarseComponent, RegistroExitosoComponent, TerminosCondicionesComponent, OlvidoSuPassComponent],
   imports: [ 
     RouterModule.forRoot(appRoutes),
     BrowserModule,

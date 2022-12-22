@@ -21,7 +21,7 @@ export class ErrorCatchingInterceptor implements HttpInterceptor {
             console.log('Caught error', err);
             if(err.error){
                 let m:string;
-                if(err.error.message){
+                if(err.error.Message){
                     let obj = JSON.parse(err.error.Message);
                     m = obj.Message;
                 }else if(err.error.Mensaje){

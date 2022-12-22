@@ -8,6 +8,7 @@ import { RegistrarseComponent } from './modales/registrarse/registrarse.componen
 import { RegistroExitosoComponent } from './modales/registro-exitoso/registro-exitoso.component';
 import { TerminosCondicionesComponent } from './modales/terminos-condiciones/terminos-condiciones.component';
 import swal from 'sweetalert2';
+import { OlvidoSuPassComponent } from './modales/olvido-su-pass/olvido-su-pass.component';
 
 @Component({
 	selector: 'app-login-inicio',
@@ -143,7 +144,9 @@ export class LoginInicioComponent implements OnInit {
 		
 		return this.loginForm.controls['username'].valid && this.loginForm.controls['username'].touched;
 	}
-
+	openModalOlvidoPass(){
+		const modalRef = this.modalService.open(OlvidoSuPassComponent);
+	}
 	obscure_email(email) {
 		var parts = email.split("@");
 		var name = parts[0];

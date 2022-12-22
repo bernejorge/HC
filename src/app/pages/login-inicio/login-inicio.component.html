@@ -28,7 +28,7 @@
                                 <label for="login">Contraseña</label>
                                 <input type="password" formControlName="password" class="form-control" id="pass"
                                     required="" />
-                                <small class="form-text a-text"><a href="#" data-toggle="modal"
+                                <small class="form-text a-text" (click)="openModalOlvidoPass()"><a href="" data-toggle="modal"
                                         data-target="#recuperarClave">¿Olvidó su contraseña?</a></small>
                             </div>
                             <div class="form-group form-check">
@@ -39,8 +39,7 @@
                                         condiciones</a></label>
                             </div>
                             <!-- El button sera 'disabled' hasta que el usuario acepte los términos y condiciones -->
-                            <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()"
-                                >
+                            <button type="submit" class="btn btn-primary btn-block" (click)="ingresar()">
                                 Iniciar sesión
                             </button>
                         </form>

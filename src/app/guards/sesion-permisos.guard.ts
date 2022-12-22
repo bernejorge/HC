@@ -17,7 +17,7 @@ export class SesionPermisosGuard implements CanActivate, CanActivateChild  {
       
       Swal({
         title: 'Error',
-        text: 'Su sesion ha exirado',
+        text: 'Su sesión ha expirado',
         type: 'error'
        })
       this.router.navigate(['/home']);

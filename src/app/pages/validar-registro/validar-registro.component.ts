@@ -65,7 +65,7 @@ export class ValidarRegistroComponent implements OnInit {
   }
   msgValidacionExito() {
    Swal({
-     title: 'Valdacion Exitosa',
+     title: 'Validación Exitosa',
      text: 'Ha realizado la validación de manera correcta.',
      type: 'success',
     }).then((result) => {
@@ -137,7 +137,7 @@ export class ValidarRegistroComponent implements OnInit {
 
   msgValidacionExitoConPerfil() {
     Swal({
-      title: 'Valdacion Exitosa',
+      title: 'Validación Exitosa',
       text: 'Ha realizado la validación de manera correcta. Utilice el usuario y contraseña que usa habitualmente en Turnos Online.',
       type: 'success',
      }).then((result) => {

@@ -67,7 +67,7 @@ export class GenerarPasswordComponent implements OnInit {
 
   showAlert(m : string) {
     Swal({
-     title: 'Password Generado',
+     title: 'Contraseña Generada.',
      text: m,
      type: 'success',
     }).then((result) => {

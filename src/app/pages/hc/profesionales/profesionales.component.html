@@ -55,7 +55,7 @@
                                           <div class='input-group-prepend'>
                                               <span class='input-group-text'><i class='fa fa-search' aria-hidden='true'></i></span>
                                           </div>
-                                          <input type='text' class='form-control' placeholder="Buscar">
+                                          <input type='text' class='form-control' [(ngModel)]="buscarTxt" (ngModelChange)="buscar()" placeholder="Buscar">
                                       </div>
                                   </div>
                               </div>
@@ -72,7 +72,7 @@
                                           <th (click)="sort('Medico')" class="tableOrderBy">Profesional <a ><i class="fa fa-sort-amount-asc fa-fw" aria-hidden="true"></i></a></th>
                                       </tr>
                                   </thead>
-                                  <tbody *ngFor="let t of turnos | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
+                                  <tbody *ngFor="let t of tunosFiltrados | orderBy: key: reverse | paginate: {itemsPerPage:cantidad, currentPage:p};">
                                       <tr>
                                           <td>{{t.Fecha | date:'dd/MM/yyyy'}}</td>
                                           <td>{{t.Especialidad}}</td>

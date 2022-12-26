@@ -17,7 +17,9 @@ export class InternacionesComponent implements OnInit, OnDestroy{
   p: number = 1;
   cantidad: number = 10;
   suscripcion: Subscription;
+  episodios?: Episodio[];
   episodiosFiltrados?: Episodio[];
+  buscarTxt: string = "";
   constructor(private personaSrv: PersonasService, private modalService: NgbModal ) { 
 
   }
@@ -36,7 +38,8 @@ export class InternacionesComponent implements OnInit, OnDestroy{
     this.personaSrv.obtenerEpisodios()
       .subscribe((res)=>{
         console.log(res);
-        this.episodiosFiltrados = res.Episodios.map(x=> Object.assign(new Episodio(), x));
+        this.episodios = res.Episodios.map(x=> Object.assign(new Episodio(), x));
+        this.episodiosFiltrados = this.episodios;
       });
   }
 
@@ -65,5 +68,9 @@ export class InternacionesComponent implements OnInit, OnDestroy{
   sort(key){
    this.key =key;
    this.reverse = !this.reverse;
+  }
+
+  buscar() {
+    this.episodiosFiltrados = Base.Filtrar(this.episodios, this.buscarTxt);
   }
 } 

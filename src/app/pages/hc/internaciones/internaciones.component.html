@@ -67,7 +67,7 @@
                                               <div class='input-group-prepend'>
                                                   <span class='input-group-text'><i class='fa fa-search' aria-hidden='true'></i></span>
                                               </div>
-                                              <input type='text' class='form-control' placeholder="Buscar">
+                                              <input type='text' [(ngModel)] = "buscarTxt" (ngModelChange)="buscar()" class='form-control' placeholder="Buscar">
                                           </div>
                                       </div>
                                   </div>

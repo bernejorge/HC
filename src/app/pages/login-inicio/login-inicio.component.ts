@@ -51,7 +51,7 @@ export class LoginInicioComponent implements OnInit {
 		if(!this.aceptaTerminos){
 			Swal({
 				title: 'Importante.',
-				text: "Debe aceptar los Terminos y Condiciones para poder ingresar.",
+				text: "Debe aceptar los Términos y Condiciones para poder ingresar.",
 				type: 'info'
 			   })
 			   return false;
